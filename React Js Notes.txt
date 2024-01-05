@@ -1,0 +1,2512 @@
+->React original website:- React.dev(documentation)
+
+->What is react?
+The Library for Web and native user interfaces.Hence React is library used for building user interfaces.
+In other words it is an Javascript Library.
+
+->Why we use it?
+Javascript Code -> React JS -> (Displays and manages Website UI and Content)
+
+->bascially react manages website by not reloading the pages again and again. All the content displayed will be in smooth manner.
+for eg:-In Netflix Websites every movies when we click they are fetched in particular page without reloading that page.
+
+->Just using Javascript will be complex to build high design user interface. ALso Code will be of errors and hard to maintain that code.
+
+
+->Javascript Refresher:-
+1)See we know that if we want to use javascript file in HTML code then we use <script></script> tag.
+
+2)Either we write just js code in <script></script> tag in html code directly or we just import it like <script scr=""></script> in html
+
+3)now in importing js file we can import it directly in <head></head> tag or after <body></body> tag depending upon us whether to run the js code before the html code executes or after the html code executes.
+
+3)Now there are two ways that we want js code to run after the html code executes:-
+1)directly script tag writing after body tag
+2)writing <script scr="" defer></script> in head tag but here we have to write "defer" keyword for being executed after html code.
+
+4)Now if we write <script src="" type="module"></script> then we can use that import/export statement to import/exprot js files from one to another.
+
+->Now if we see react Code then we will not see any script tags in body section nor in head section.
+
+->React Projects use a "build process".It means the code we write is not the code that gets executed in browser, but that code is first tranformed before its handed to browser.
+
+->The above reason is because React use a special type of code i.e "JSX". that is why the code we write is not executed and it first transformed and then handed to browser
+
+->if we write default js code in react projects it will give us error.
+
+->Also the Js code would not be optimized for production.it means the length of Js code will be more because of names of functions and variables lengths are more and other things also which makes reduce optimization of code.
+
+
+->So to use such a built process React provides us various methods like:-
+1)create-react-app(basically the command is "npx create-react-app appname)->will learn further
+2)vite  
+
+->we know about import/export:-
+syntax:-
+export default the_thing_you_want_to_export
+->see only one default export is done.
+
+->one method:-
+export {fun1,fun2} as fun;
+import fun;
+
+or
+
+->second method
+export {fun1,fun2}
+import {fun1,fun2} as fun;
+
+
+->eg:-let say there are two files app.js and util.js
+
+1)first method:-
+->in util.js:-
+export default "apiKey";
+
+->in app.js:-
+import {apiKey} from "util.js";
+
+2)Second method:-
+->util.js:-
+export default let name="js";
+export let apiKey="abc";
+export let form="cdb";
+
+->app.js:-
+import {name} from 'util.js';
+import {apiKey} from 'util.js";
+import {form} from 'util.js";
+
+or
+
+import {name,apiKey,form} as myObj from 'util.js';
+
+3)Third method:-
+app.js:-
+import * as myObj from 'util.js';
+
+4)we can also rename any thing that is imported:-
+import {apiKey, form as contact} from 'util.js';<-like this
+
+->Destructuring:-
+const {first,last}=["sujal","joisar"]->see in right side there is an array not object so in left side there should be square brackets instead of curly braces.
+
+const [first,last]=["sujal',"joisar"]->okk
+->**Now the names that are used for destructuring in left us depend upon us that we can keep whatever names we want.
+
+->Let's see destructuring for object:-
+ const {name,age}={
+   name:"sujal",
+   age:20
+}
+->now see here we have to use curly braces in destructuring of object. In sort use square brackets in array and curly braces in object.
+
+->**Now see the names used for destructuring in object are not depend upon us means we can't keep names whatever we want. we have to keep names as they are defined in object.
+
+->**one way we can kept by using "alias":-
+const {name:username,age}={
+  name:"sujal",
+  age:20
+}
+->this way we can use alias
+
+
+->We can also use destructuring in case of function parameter list:-
+ if a function accepts a parameter that will contain an object it can be destructured to "pull out" the object properties and make them available as locally scoped variables (i.e., variables only available inside the function body).
+
+Here's an example:
+
+function storeOrder(order) {
+  localStorage.setItem('id', order.id);
+  localStorage.setItem('currency', order.currency);
+}
+Instead of accessing the order properties via the "dot notation" inside the storeOrder function body, you could use destructuring like this:
+
+function storeOrder({id, currency}) { // destructuring
+  localStorage.setItem('id', id);
+  localStorage.setItem('currency', currency);
+}
+
+
+->Lets start about React fundamentals:-
+
+->Components:-Components are building block for react to build user interface. 
+->React Apps are built by combining components.
+
+->Basically Components are built by using HTML,CSS and JS languages to built the modules(known as components) in React Apps.
+
+for eg:- in Web page there is Header,footer and Carousel etc then this all are components. and they are built by combining html,css and js languages.
+
+->Advantage of components:-
+1)Reusable:-This components can be used anywhere once made in one react app in page. then it can be reused in any pages,apps etc.
+
+2)Now the related code is stored together means Html,css and js code is stored together.
+
+->Udemy Starting project:-
+->here we will see the commands:-
+1)npm install-to install imp react packages and modules
+2)npm run dev-to run the development server
+
+so just download the zip file->extract it->open in vs code->open terminal->cd "Udemy React Course"->cd "01-tab"->cd "01-tab"->npm install->npm run dev
+
+->Now see there will be many files like index.html,app.jsx,index.jsx etc.
+
+->Now .jsx extension means "Javascript Syntax Extension".
+->it allows to write the html code in js files.
+
+->But this .jsx files codes are not supported in browsers.hence react developer server behind the scenes transforms that code before reaching to browser.
+
+
+->**So now basically the React Components are this "Javascript functions" only simple!!
+->This function should follow2 rules:-
+1)function name should start with uppercase letter
+2)function should return some content.
+
+
+->First Task:-make first custom component
+1)Just go in app.jsx files 
+2)make another function such as "Header"(name should start with upperacase letters)
+3)it should return 
+4)copy the content of header from function app() and paste in above function.
+
+->Now the beautiful thing of this JSX code is that we can use the components in other components as simple HTMl tag
+
+for eg:-we made Header() function above.now if we want to use in app() function then just write like this:-
+"<Header />"->see here the name should be same and at last forward slash is imp in JSX otherwise error will come.
+
+
+->Some imp things:-
+1)See some of the react projects use '.js' extension instead of '.jsx'. so it is possible that you can use any of this extension depending upon the project.
+2)in some react project this import from './app' is allowed instead of  import from './app.jsx'. means some react projects allow to not mention the extension and some do not allow.
+
+
+->understanding:-
+1)See the content on the browser when we see the "view page source" then we can see just the "index.html" not the app.jsx or index.jsx file. but see the index.jsx file is loaded in browser because we have import that index.jsx file in index.html file.
+2)now in index.jsx file, content(components) of app.jsx are exported . app() function is imported here and used as jsx code here. Also we cannot see any react component in index.jsx file and also this imported app function used as jsx code is also passed as an argument to render() function.
+3)then we can see that "ReactDom" that is react library which is main responsible to show the "app components".this app component is rendered by passing "JSX" code.This render method is being called by an object by creating another method "createRoot()".
+4)this createRoot() method takes an existing HTML element as an input,this input is not created by react but it is part of index.html file already.
+5)so that <div id="root"></div> of index.html is passed to this createRoot() method as an entry point and then it passes the react "app" component.
+
+->In short we will use the JSX code inside the components(js functions)
+
+
+->***the Main entry point of React app is this "index.jsx" file.
+
+->**So createRoot() and render() method are responsible for rendering a single root component(in this case is the app component).Also there will be nested react components under app compoenent so they will be also included with the help of reactDom() and render() method.
+
+->There will be tree-like structure of all react components under the main root component.
+
+->**But see one thing is another to recognized that in view page source ->index.html file is shown-> in that app() component is shown in that 
+
+<div id="root">
+ app() component
+</div>
+
+but see we cannot see the custom react component for eg:-
+we have made custom component "Header" that starts with uppercase but here it will show simple default built-in html component <header>.
+
+->hence the custom components built by react developer build components by starting with uppercase to tell react that this are diff then the built-in components.
+
+->Now lets see about Outputting dynamic content in JSX:-
+1)see there are 2 types of content:-static and dynamic
+
+->static:-can't change at runtime
+for eg:- <h1>hello world!</h1>
+
+->dynamic:-content derived at runtime
+for eg:-<h1>{username}</h1>
+
+->in short static means ek var lakhi didhu pachi ae change nahi thai ane dynamic ma aapde change kartu rehvu che toh ae rite logic lakhvano JSX ni andar!!
+
+->Let's see the dynamic o/p in our starting project:-
+function Header(){
+  return(
+    <header>
+    <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
+    <h1>React Essentials</h1>
+    <p>
+      Fundamental React concepts you will need for almost any app you are
+      going to build!
+    </p>
+  </header>
+  );
+}
+
+function App() {
+  return (
+    <div>
+	 <Header /> {/* using that above component in app function*/}
+      {/* <header>
+      <main>
+        <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
+        <h1>React Essentials</h1>
+        <p>
+          Fundamental React concepts you will need for almost any app you are
+          going to build!
+        </p>
+      </header> */}
+        <h2>Time to get started!</h2>
+      </main>
+    </div>
+  );
+}
+
+export default App;
+
+->see here we want "Fundamental","Core","Crucial" words in place of that "Fundamental" written in above jsx code in header part.
+
+->so we will include this five lines code above the "Header" component:-
+
+const reactWords=['Fundamental','Crucial','Core']
+
+function getRandomInt(max){
+  return Math.floor(Math.random() * (max+1));
+}
+
+->**Now to tell react that we want dynamic o/p or value just use 'curly braces {}'.
+
+->so in that 'Header' component replace 'Fundamental' word with this:-
+ {reactWords[genRandomInt(2)]}
+
+->just above thing only in that place.
+
+->Or if we needed more clear code:- just store the result of that genRandomInt() function in some variable and then write that variable inside the JSX code.
+
+const expression=reactWords[genRandomInt(2)];(place above the return statement only)->not inside that return
+
+in that place:-{expression} 
+
+
+->Now also change the way to load that react image:-
+just do this:-
+
+import reactImg from 'foldername';
+and in place of that src={reactImg}
+
+->so above is the best way to import any image.
+
+->Props:-
+1)React allows us to pass the data to components using "props".
+
+->Flow diagram:-
+
+JSX Code    set props          receive props
+that uses a  ----->  Component  ------>     Component function
+component
+(Set Component Input                      (receive props
+data using "custom                         parameter with configuration 
+Html attributes(props)")                   data)
+ 
+
+->lets understand "props" concept by an example:-
+->let us add this new component in our "app.jsx" file:-
+function CoreConcept(){
+  return (
+    <li>
+      <img src="..." alt="..." />
+      <h3>Title</h3>->here dynamic title should come
+      <p>Description</p>->here corresponding dynamic o/p should come
+    </li>
+  );
+}
+->See this title,description etc data above should be different all the time as this CoreComponent() is used.
+
+->see this we added in app() component:-
+<main>
+        <section id="core-concepts"> {/* see this id="core-concepts we have use because there is already designed in css file" */}
+          <h2>Core Concepts</h2>
+          <ul>
+            <CoreConcept />
+            <CoreConcept />
+            <CoreConcept />
+            <CoreConcept />
+          </ul>
+        </section>
+        <h2>Time to get started!</h2>
+      </main>
+->Now our goal is that we are using that component "CoreConcept" multiple times but we want different data in that all times we use.so that is easily possible by using "Props".
+
+->How can we?
+->*simply Just add custom attributes to the custom components.
+->*Also Hence this are our components so we can set any attributes on this components we want.
+->*Also the name of those attributes is up to us. we can keep any we want.
+
+->let's say in first time of component "CoreConcept" used above we set the attributes and its values like this:-
+
+<CoreConcept title="components" description="The core UI building block" image={componentImg}/>
+
+->*Now here title,description and image are called props(custom attributes) and "components" and "The core UI building block" and {componentImg} are the values of this porps respectively.
+
+->see in image we want to keep it dynamically so we have written curly braces.
+
+->**See we can pass any type of values to this props:-string,number,object,arrays etc
+
+for eg-
+
+<UserInfo name="Max" age={34} details={{username:'Max'}} hobbies={['Cooking','Reading']} />
+
+->***now the props that we have set in above "CoreConcept" is to be passed to component CoreConcept.Now in normal functions there we need different parameters for accepting the values send by other functions or variables but here in react there will be only one parameter for accepting multiple values and name of that parameter is upto us we can keep it whatever we want but in general we will keep "props" only.
+
+->**Remember we are not calling this component functions by ourself in this code,but we are using it as an HTMl elements in JSX code form and react will be responsible for calling actual function.
+
+->***So react will pass this props(parameters) to this component functions when it is called and the parameters(props) that are passed will be in Object form(i.e key-value pair).
+
+->**so in above title,description and image will be keys and "components","the Core ui building block" etc will be its values respectively.
+
+->****remember when we use "props.attributes" in actual component function then the attributes i.e keys name should be same as we have used in defining props.
+
+->**Now see we have imported the "data.jsx" files and set the props from that file and passed to actual component function.But see the length of code increases because we are using the same names of the props as names of the properties in actual component function. eg:-see in above "CoreConcept" component function there is "title","description" and "image" and in that names of the props(attributes) are also the same "title","image" and "description". 
+
+->>***So now for above situation where the props names are same as the name of the properties in actual component function then just use Spread Off operator.
+
+->just do like this:-
+<CoreConcept {...CORE_CONCEPTS[0]} />
+<CoreConcept {...CORE_CONCEPTS[1]} />
+<CoreConcept {...CORE_CONCEPTS[2]} />
+<CoreConcept {...CORE_CONCEPTS[3]} />
+->see this is only applicable if the above situation arises.
+
+->//we can also use destructuring in function parameters
+// function CoreConcept({title,description,image}){
+//   return (
+//     <li>
+//       <img src={image} alt="..." />
+//       <h3>{title}</h3>->then just use the destructuring names
+//       <p>{description}</p>
+//     </li>
+//   );
+// }
+->**See the names in the destructuring should be same as the name of the props otherwise there will be error.
+
+->Now we have done proper file formatting and also css files formatting.
+
+->But the problem is that eventhough we have seperated the css for particular component in different folders but the Scopes of this styling will be problem means lets say there are two header components one is that we separated and other is in app.jsx then styling applied to the header that we seperated will also affect the header in app.jsx. so this is problem of scope of styling. that we will see in last.
+
+
+
+->***Let's understand about another "prop" called "children" prop:-
+
+->lets add one another section in app.jsx file:-
+<section id="examples">
+                <h2>Examples</h2>
+              <menu>
+                    {/* <li><button></button></li>
+                    <li><button></button></li>
+                    <li><button></button></li>  see here we want list of buttons but here we can make component as there is repetition*/}
+              <TabButton>Components</TabButton>
+              </menu>
+          </section>
+
+->Now we have made our custom component "TabButton" in another file called "TabButton.jsx". 
+
+->Now TabButton.jsx Code will be like this:-
+export default function TabButton(){
+    return(
+        <li><button></button></li>
+    );
+}
+
+->**Now see above in app.jsx file if we use this custom component "TabButton" in app.jsx file then see we have written "components" between that TabButton html format.But if we see in browser we will not see that "component" written over there.Because React will ignored that text written between custom component because it will confuse where to show this text. See we are just telling to show "component" as o/p but we are not telling him where to show in browser.
+
+->**hence now "children" prop will come into picture.
+Now again just add props as an parameter in TabButton.jsx file in TabButton component.
+
+export default function TabButton(props){
+    return(
+        <li><button></button></li>
+    );
+}
+
+->**Now see we are not setting any props in app.jsx file but Always remember that every custom component will receive props eventhough they are not set.but React will send such props(object in key-value pair) that will be pretty empty.
+
+->**But we will not get entirely empty there will be by default built-in prop send by React that is "children" prop.
+
+export default function TabButton(props){
+    return(
+        <li><button>{props.children}</button></li>
+    );
+}
+
+->***Hence this "children" prop is special prop that is set by react and not by adding/setting attributes in component function .
+
+->*** So in short "children" prop simply refers to the Text between the component.
+<TabButton>Components</TabButton>->see here children.prop will refer to "component" written between <TabButton>
+
+
+->***for eg:-
+
+->App Component:-
+<Modal>
+<h2>Warning</h2>
+<p>Do you want to delete this file?</p>
+</Modal>
+
+->Modal Component:-
+function Modal(props){
+  return <div id="root">{props.children}</div>;
+}
+
+->**so here The content between component opening and closing tags is used as values for the special "children" prop.
+
+->**react automatically passes a special "children" prop to every custom component.
+
+->For our case we can also use destructuring:-
+// export default function TabButton({children}){
+//     return(
+//         <li><button>{children}</button></li>
+//     );
+// }
+
+
+->***This way of building Component where one component can wrap other component or other content is called "component composition".
+
+
+->***Now we want that clicking on this tabbuttons some event should occur.Now in javascript we were doing like this:-Event Handling Concept in React:-
+
+document.querySelector('button').addEventListener('click',()=>{
+  //task
+});
+
+->But this is react. we will not write code according to Javascript.
+
+->***Now for handling such events "React" provides us various "built-in props" which we can directly apply on components.
+
+->In our case:-
+->In TabButton.jsx file:-
+export default function TabButton({children}){
+    return(
+        <li>
+	    <button onClick={}>{children}</button>
+	</li>
+    );
+}
+
+->see here just write "on" and we will see many built-in 'on' props.
+
+->***Now the value for any event prop or lets say this "onClick" prop is "function".Because we want that when the user click on this then the specified function should be executed.
+
+->***The function that we will define will be inside this TabButton() function means it will be nested function. In Javascript it allows to define functions inside another functions, and this inner functions will be only callable inside the outer function.The function names are upto us but keep it simple.
+
+->***The Main Advantage of defining this event handler functions inside the component function is that they have access to the component's props and state.
+
+->***Also Remember we have to pass 'function' as values so do not add parenthesis while passing function. We want that this function to be passed by react.for eg:-
+
+export default function TabButton({children}){
+
+    function handleClick(){
+        console.log("Hello World!");
+    }
+
+    return(
+        <li>
+            <button onClick={handleClick}>{children}</button>
+        </li>
+    );
+}
+
+->see here do not write 'handleClick()'. just only write 'handleClick'. 
+
+
+->Now we want that clicking on this tabbuttons events should occur such that dynamic content should be shown in the screen.means when we click on 'props' then some content should be shown, and if we click on 'components' then other content should be shown.
+
+->**So for this we have to handle different events when the click is happen on that buttons.
+
+->****Now we have custom buttons instead of built-in buttons in that <menu></menu>.So we need to first listen the click on our custom  buttons.And keep in mind, every custom components will wrap the native html or native JSX elements inside it. (means ke sada html elements (built-in) jem ke <button>,<li> etc aevi rite chele store karsej)
+
+->***So built-in buttons are provided by React.Now this built-in buttons will have their built-in 'onClick' prop.Now in order to make our custom buttons tapable/clickable,we will set the value of this built-in Onclick prop from outside our custom component(inside the app component).
+
+->>**means see built-in buttons hase aeni pase toh built-in prop hasej aapde js ma pan jovij chi "button.onClick",toh have react ma aapde custom components banavi chi ane apde aem joi chi ke ae custom components upar click kare toh event handle thavi joie naki built-in button upar click kariye toh. toh aana mate aapde custom components clickable thai,aena mate aapde ae built-in props ni value custom component ni bahar thi set karisu. in other words, aapde app component che ne aeni undar thi aapde set karsi ane 'tabbutton' component ne aapsi, ane ae pachi built-in button na prop ne pass karse, ane ae function pachi executed thase!!
+
+
+->***see 'children' is a special type of prop.that name is not upto us. we have to write that name only during we pass something betw opening and closing of component functions.
+
+->**in end we are doing here is that we are passing pointer to this 'handleSelect()' function,we are passing 'handleSelect' function as an value to 'custom' 'onSelect' prop, and that we are forwarding to this built-in prop i.e onClick prop. so when the button is click then 'handleSelect' function from the app() component will be executed.
+
+->it will be look like this:-  <TabButton onSelect={handleSelect}>Components</TabButton>
+
+->**Now see we have to also send the button name that was clicked to handleSelect() function.means if "components" custom button was clicked then according to that content would be shown ,"props" is clicked then according to that content should be shown.etc 
+
+->so our handleSelect() function would be like this:-
+function handleSelect(selectedButton){
+ //selectedButton=>'components','props','jsx','state'
+ console.log('button clicked');
+}
+->so here we added 'selectedButton' as an parameter to handleSelect() function which is used to tell react that which button is pressed.
+
+->**Also we have to do changes in our app() component in passing values to the  custom 'onSelect' prop.So instead of passing just 'handleSelect' to 'onSelect' as an value, we will pass arrow function to this 'onSelect' as an value to give appropriate identitfier to handleSelect function and tell react which button was pressed.
+
+->**Hence now this arrow function will be passed as an value to custom prop 'onSelect' and also to the built-in prop 'onClick'.
+
+->now in our custom app component:-
+ <TabButton onSelect={()=>handleSelect('components')}>Components</TabButton> <---this will be the change.
+
+->**See now we can write 'handleSelect' with parenthesis i.e 'handleSelect()' because the code inside this function body will not immediately executed but it will just define the arrow function.that arrow function will be passed as an value to the custom prop 'onSelect' and then to built-in prop 'onClick' then that code inside the function 'handleSelect()' function will be executed.
+
+
+->**so this way we can handle the events based on which button is pressed and which function to be execute and what parameter is to pass to the handler functions. 
+<TabButton onSelect={()=>handleSelect('jsx')}>JSX</TabButton>
+              <TabButton onSelect={()=>handleSelect('props')}>Props</TabButton>
+              <TabButton onSelect={()=>handleSelect('state')}>States</TabButton>
+
+->in TabButton.jsx file:-
+->export default function TabButton({children,onSelect}){
+    return(
+        <li>
+            <button onClick={onSelect}>{children}</button>
+        </li>
+    );
+}
+//in most of the cases 'onSelect' is the special prop which is passed as an value to the built-in button prop called 'onClick' and event will be handled
+// by executing particular function and this value of this 'onSelect' prop provided by react is set in app() component.
+
+
+->**See now we have done this in our app() component:-
+ let tabContent='please click a button';
+
+ function handleSelect(selectedButton){
+   //selectedButton=>'components','jsx,'props','state'
+   tabContent=selectedButton;
+ }
+
+and 
+
+in down:- we added this
+ <TabButton onSelect={()=>handleSelect('state')}>States</TabButton>
+              </menu>
+              {tabContent}<-----this one 
+          </section>
+
+->**but see when we click on this custom components(buttons) we do not see any upadation in {tabcontent} it will remain same as it is. It should be upadated when we click on 'component','props' etc.see the handleSelect() function is properly executing but the UI is not updating means {tabContent} is not updating.
+
+->**The Reason is because React Components by default are executed only once and that is one recognized somewhere in the code and it is first time recognized only in the index.jsx file under that 'createRoot()' statement.here in our case also the app() component is not executing again. so how that dynamic content/UI can be updated.
+
+->>**So Now new concept comes into the picture that is "state". we have to tell the react that the app() component function should be executed again to update the content inside it.
+
+->Let's understand about 'state':-
+
+->**This concept is all about registering variables that are handled by react and updated with the help of function that is provided by the react that data changed and will cause react to update the UI.
+
+->now 'state' are the special variable that are created with the help of the special functions provided by the react and they are first imported from react library:-
+
+ import {useState} from 'react';
+->****this is called react-hook.all this functions start with 'use' keyword.
+
+->**those functions which start with 'use' are called React hooks.
+
+->**the special thing about this react hooks are that they are regular functions but they are executed only inside react component functions or inside another react hooks i.e custom react hooks(you will learn further).
+
+->****Now this are the two main imp rules of this react-hooks:-
+
+1)They should not be called outside any component functions.as we have discussed in above point that it should be only called inside the component functions only or inside another hooks.
+
+2)they should not be called in nested code statements.
+->see understand:-it means it should be directly called inside the react component functions at the top level.it should not be like calling in any inner functions inside that component functions. 
+
+for eg:-
+function App(){
+  useState();
+
+  function handleSelect(){}
+}
+->this way is correct.
+
+->function App(){
+  function handleSelect(){
+	useState();
+}
+}
+->this is not correct.
+
+->**So 'useState()' is the most often hook provided by react,which allow us to manage some component specific state, which is simply some data stored by react,which when changes will triggered the component function to re-execute.
+
+
+->**Now the useState() function accepts the argument that will be the default value that you want react to be store.in our case the default value we want to store is that 'please click on button'.
+
+->like this it will look:- useState('please click on button text')
+->this will change as per state.Now this useState() basically returns the value that can be store in some variable or constant(dosent matter).
+
+->**Now the value that we will get back here will be the array always by useState function.
+
+const textArray = useState('please click on button text');
+
+->****See in this array there will be only two elements always.
+->we can also use destructuring:-
+
+const [ selectedTopic, setSelectedTopic ] =useState('please click on button text');
+->see here the names are upto us we can keep whatever we want.this are the general naming convention that react follows.
+
+
+->Now let's talk about this values given by useState to this 'selectedTopic' and 'setSelectedTopic':-
+
+->**Now in 'selectedTopic' useState will pass the current value stored by the react i.e in our case 'please click on button text'. and this 'selectedTopic' may get updated as the execution cycle goes on.
+
+->general:-
+
+const [counter,setCounter] = useState(0);
+->**so here '0' is the intial value of 'state' stored by the react.
+->and this intial value of state is passed to this first parameter in array i.e counter.
+
+
+->**Now the second element that will be passed by useState() will be always an function. It is basically called 'state updating function' means it will update the stored value by the react and it will tell react to re-execute the component function in which useState() is called.and then also the value of the first parameter in array will also change to new updated value.
+
+->**See here we will use 'const' only,no need to create any variables because as the component function executes again the 'selectedTopic' variable will be recreated every time.
+
+
+->Now the changes we have done is:-
+->in our app() component:-
+
+const [selectedTopic,setSelectedTopic]=useState('please select button text');
+
+function handleSelect(selectedButton){
+ setSelectedTopic(selectedButton);
+ console.log(setSelectedTopic);
+}
+
+->in down:-
+{selectedTopic}
+
+->***Now see it works.Now the intresting thing is that see in your console in browser:-
+
+->**When you call this state updating function i.e setSelectedTopic. react at the end updates state variable and then re-executes this component function.So now there will be only updated value available after the component function executes.only then the new value is available which we dont see it if we log right after scheduling this  update because we will be still in the old app function.
+
+->Just udemy one practice example:-
+
+->It is given that price=$100 intially and there is button below it "apply discount" now we have to use the concept of state to change the value of price=$100 to price=$75 when that button is click.
+
+->code:-
+import React from 'react'; <- we have to write
+
+export default function App(){
+  
+ const [price,setprice]=React.useState(100);<- we have to write
+
+ function handleSelect(){<- we have to write
+  setPrice(75);
+}
+
+return(
+  <div>
+    <p data-testid="price">${price}</p>
+   <button onClick={handleSelect}>Apply Discount</button><- we have to write explicitly
+ </div>
+  );
+ }
+
+->**Now we have updated data.jsx file:-
+so there we can see that 'const EXAMPLES' which is an list of objects and we can see that keys under it matches with out identifiers that we send through our custom prop onSelect to the handleSelect() function i.e keys are 'component','jsx' and so on. so our identifiers names are also same.
+
+->Now for those keys in EXAMPLES we find nested js objects,which consists of title,description and code.
+
+->now let's use that data to show output when this custom buttons are click:-now that is pretty simple
+
+->***See we are storing identifiers i.e 'components','props', and so on to the state variables,so we can use just state to access data dynamically.
+
+->*****See the above task can only work if the identifiers that are sending there names should match with the properties(keys) in 'EXAMPLES'.
+
+->just add this much in app.jsx file down the <menu></menu>:-
+<div id='tab-content'>
+                <h3>{EXAMPLES[selectedTopic].title}</h3>
+                <p>{EXAMPLES[selectedTopic].description}</p>
+                <pre>
+                  <code>
+                  {EXAMPLES[selectedTopic].code}
+                  </code>
+                </pre>
+              </div>
+
+->******Now see we will get error in browser because see in this statement:-
+
+const [selectedTopic,setSelectedTopic] = useState('Please Select a text');
+
+->see now 'please select a text' is one intial identifier that we are storing in selectedTopic variable and this selectedTopic variable we are using to access the data dynamically from EXAMPLES. but see in EXAMPLES there is no Key like 'please select a text' ,there are only 'components','props' and so on keys.
+
+->so just set 'useState('components')';->it means just set intial value stored in our state variable equals to 'components' instead of that 'please select the text'. and then it will work.
+
+
+->*****Now we want to render the data conditionally:-
+see we have set the intial value of state variable equals to 'components' so when we reload the page that data related to 'components' will be shown intially.
+
+->Now this we don't want to show the data intially.instead we want that when we reload the page there some text written should be came 'please select a topic'.
+
+->so just do this:-
+ 
+const [selectedTopic,setSelectedTopic] = useState('');
+->keep the string empty/ pass null.
+->Now if we do this changes then again our page breaks.
+
+->**Instead do that add conditional statements in that means if 'selectedTopic === null' then <p>Please select a topic</p> <-----this text should be shown otherwise it should ne equals to null
+
+->then add this statement 'selectedTopic != null' then <div> content there </div> <---- show this other wise null.
+
+->it will look like this:-
+->const [selectedTopic,setSelectedTopic]=useState('');
+
+->
+              { !selectedTopic ? <p>Please Select a Topic</p> : null}
+              {selectedTopic ?  <div id='tab-content'>
+                <h3>{EXAMPLES[selectedTopic].title}</h3>
+                <p>{EXAMPLES[selectedTopic].description}</p>
+                <pre>
+                  <code>
+                  {EXAMPLES[selectedTopic].code}
+                  </code>
+                </pre>
+              </div> : null}
+
+->second way is that instead of writing null directly write actual code:-
+
+{ !selectedTopic ? <p>Please Select a Topic</p> :  <div id='tab-content'>
+                <h3>{EXAMPLES[selectedTopic].title}</h3>
+                <p>{EXAMPLES[selectedTopic].description}</p>
+                <pre>
+                  <code>
+                  {EXAMPLES[selectedTopic].code}
+                  </code>
+                </pre>
+              </div>}
+->like this way.
+
+->third way:- is that using && operator which is lit bit tricky(see in video )
+
+->fourth way:-storing in some variable.
+
+ ->***Now we want to apply Dynamic CSS styling means we want to highlight that custom button so we can know which button is clicked:-
+
+->**so now we will be using 'class' concept:-
+->export default function TabButton({children,onSelect}){
+    return(
+        <li>
+            <button className="active" onClick={onSelect}>{children}</button>
+        </li>
+    );
+}
+->just add "className='active'" in that we can see some results(styling is done by resources).
+
+->see now if we write this much then all buttons will be styled means we want that when we click on one button that button should only be highlighted while other should not be highlighted.
+
+->****Now for this we will pass new third prop i.e 'isSelected' in our Tabbutton.jsx file:-
+
+export default function TabButton({children,onSelect,isSelected}){
+    return(
+        <li>
+            <button className={isSelected ? "active" : undefined} onClick={onSelect}>{children}</button>
+        </li>
+    );
+}
+
+->App.jsx file changes that we have done :-
+<TabButton isSelected={selectedTopic === 'jsx'} onSelect={()=>handleSelect('jsx')}>JSX</TabButton>
+
+
+->this prop name is also up to us. This prop will basically accept boolean values. if the button is selected means if 'isSelected==true' then apply 'active' class otherwise not.
+
+->Now see till here it is completed.
+
+
+
+
+
+->**Now we want change that see this:-
+<CoreConcept title={CORE_CONCEPTS[0].title} description={CORE_CONCEPTS[0].description} image={CORE_CONCEPTS[0].image}/>
+            <CoreConcept {...CORE_CONCEPTS[1]}/> {/* we can also use the spread off operator if the props name and the properties in actual component function are same*/}
+            <CoreConcept title={CORE_CONCEPTS[2].title} description={CORE_CONCEPTS[2].description} image={CORE_CONCEPTS[2].image}/>
+            <CoreConcept title={CORE_CONCEPTS[3].title} description={CORE_CONCEPTS[3].description} image={CORE_CONCEPTS[3].image}/>
+
+->here see we have written the CORE_CONCEPTS 4 times as we want to display the four data,but see we are repeating this CORE_CONCEPTS again.
+
+->if we remove any data from 'data.jsx' file in CORE_CONCEPTS, then in browser the fourth data will be empty and there we will see the space. that we don't want.
+
+->we want that as we increase the data the space should be increase. means agar aapde '1' j data nakhiye toh tya ae display that baki 3 mate space na dekhade.now aapde '2' data nakhiye to space increase thavi joiye ane 1 and 2 bane show thava joiye baki mate space na dekhavi joiye.
+
+->So basically we are doing that Outputting list data dynamically:-
+
+->*****so first understand this that we can Output an array of Data in jsx:-
+
+like {['hello','world']}->just write this below the <h2>Core Concepts</h2> and see the o/p
+
+->*****ALso we can o/p an array with JSX data:-
+
+{[<p>hello</p>,<p>World</p>]}
+
+
+->*****So in jsx there are two ways:-1)array of data,2)array of jsx components
+
+->Now see we have 'CORE_CONCEPTS' is an array of javascript objects, and JSX is not really able to output that, and also dont know that 'image' data in data.jsx should be wrap inside the 'image' element in app() component and so on. 
+
+
+->****but JSX is capable to output the array of JSX elements.so we will try to transform this array of objects in array of JSX elements.This can be done using the built-in map() method.
+
+->***map() method produces the new array based on existing array.for that it takes an javascript function as an input , i.e arrow function and this function will automatically receive array item one by one.let's say the name in that input we keep is 'conceptItem'(it is upto us).now this arrow function will be executed by the javascript for every item in that array(CORE_CONCEPTS).
+
+->so inside of this arrow function,we can then return the code we want to transform this item(in our case 'conceptItem') too.so in our case we wanna transform it to this 'Core_Concept' component being used as JSX.
+
+->it will look like this:-
+{CORE_CONCEPTS.map((conceptItem)=>{<CoreConcept {...conceptItem}/>})}
+->here we have done the change in this '<CoreConcept {...CORE_CONCEPTS[1]}/>' is that we dont longer need to access the CORE_CONCEPTS index here. instead we will use this 'conceptItem' because that already is one of those items in this 'CORE_CONCEPTS array'.
+
+->jeh aapde index dwara muklta ta CORE_CONCEPTS ni item ne as an prop tarike like CORE_CONCEPTS[1] aavi rite ae have aapde map method this pehla badha ne lai lidha as an 'conceptItem' and pachi ae aeni rite map kari dese ae badha ne 
+
+->Now just try to remove the last data in CORE_CONCEPTS array in data.jsx file and see the o/p. 
+
+->****there will be one error coming like :-
+Each child in a List should have a unique "key" prop that we will see later in advance.
+->now to get rid of this warning just add the 'key prop' over there in app() component:-
+
+->{CORE_CONCEPTS.map((conceptItem)=>(<CoreConcept key={}  {...conceptItem}/>))}
+
+->eventhough we are not using that prop in our CoreConcept.jsx file:-
+export default function CoreConcept(props){
+    return (
+      <li>
+        <img src={props.image} alt="..." />
+        <h3>{props.title}</h3>
+        <p>{props.description}</p>
+      </li>
+    );
+  }
+
+->but still we must add it because it will be used by the react.
+
+->***it is a special prop that is understood and handle by the react and this 'key' prop can be added to any component.It can be added to built-in components and custom components.
+
+->****Now the value of this 'key' prop will be equal to the 
+that uniquely identifies the list item.(means ke aapda case ma 'conceptItem' ni andar badha ek kari ne objects aavta jase CORE_CONCEPTS mathi, toh aema ae objects ni properties ma jovo ke kai property che jeni value hamsesha unique hoi, kem ke CORE_CONCEPTS ni andar jetla objects che aema 'title' property/attribute che hamesha unique hase) toh aa vastu key prop ne pass karvani.
+
+->aavi rite:-
+key={conceptItem.title} 
+
+->aa add karvathi warning nahi aave!!
+
+
+->Moving to the React Essentials:-(New topics)
+->we have covered the basic fundamentals of the react.
+
+->Now It is possible that React Projects can be build without using JSX code.But most of the react projects use JSX code.But as an React developer we need to know this how can we build react project without using JSX code.
+
+->See this codes and compare:-
+
+->Jsx code:-
+<div id="content">
+ <p>Hello World!</p>
+</div>
+
+->without using JSX code:-
+React.createElement( 
+ 'div',
+ {id : 'content'},
+ React.createElement(
+ 'p',
+ 'null',
+ 'Hello world'
+ )
+);
+->Now here see React uses 'createElement' method which takes first parameter as 'component type',then takes 'props object' you might to pass to that component or element as an second argument,and the third argument will be the 'child element'(the content betw the component tags)
+
+->***So mostly this non-jsx approach can be used when the project does not require build process,while jsx requires it. we know jsx uses build process means the code we write will not be supported by browser but that code will be transformed into code that is supported by browser.
+
+->Now lets see the JSX syntax:-
+->**see over there we have written 'return statement':-
+
+return(
+ <div>
+ <Header />
+ <main> code here </main>
+ </div>
+); 
+
+->Now if remove the <div></div> then we will get error.because there should be at least one parent element in JSX element.See in Javascript there is a rule to written only single element. we cannot written more than one element by applying parenthesis.
+
+like this:-
+return(element1, element2) <---not possible
+
+return (element) <---possible
+
+->hence in JSX also if we remove div element, then we will get error because we will be returning header and main elements without parent element.
+
+->so we need to wrap this two elements header and main in one parent element and then return it.
+
+->Now the problem comes that when you inspect in browser:-
+we see the 
+
+<div id="root">  
+<div> <-----now this is extra div element 
+ <Header />
+ <main> code here </main>
+ </div> <----
+</div> 
+
+->see here we have extra 'div' element inside the <div id="root">  element which is of unnecessary element.see we have that div root element provided by index.html file.
+
+->Now to remove that extra elements from the DOM then react provides an alternative i.e special built-in component 'Fragement' element which is used as an root element to wrap other elements but it will not be render on the actual screen.
+
+->import {Fragment} from 'react';
+ 
+<Fragment>
+ <Header />
+ <main> code here </main>
+ </Fragment>
+
+
+->so now when you inspect in browser you will not see the extra elements.
+
+->***Now there is more one shorter alternative where we will not use 'Fragement' component just wrap the elements that we want under this 
+
+->
+<>
+elements to be wrapped 
+</>
+
+->in our case:- 
+<>
+ <Header />
+ <main> code here </main>
+</> 
+
+->For eg:-Udemy practice example
+
+function Summary({ text }) {
+  return (
+    <>
+    <h1>Summary</h1> <---see if we return this both single then error will come hence we have wrapped this both inside the <></>
+    <p>{text}</p>
+    </>   
+   );
+}
+
+function App() {
+  return (
+    <div id="app" data-testid="app">
+      <Summary text="Fragments help you avoid unnecessary HTML elements." />
+    </div>
+  );
+}
+
+export default App;
+
+
+
+->Now same as we have done earlier splitting of components in different files and will import/export them:-
+
+->we have done it. But see observe one thing before this formatting as we were clicking on this different tabs 'components','props' and so on in Examples section.app() component function was reexecuting because of changing of state,but also in our header part {'fundamentals','coreconcepts','crucial'}<--- this we have done as an dynamic content so this were also changing as we click on this tabbuttons. that we dont want.
+
+->But as we have done formatting,now it will not change because only Examples() component function now will be reexecuting as per state not the app() function.
+
+
+
+
+->***Now before we move to next projects,there are some additional Key Component & Props:-
+1)Forwarded Props
+2)Multiple Props
+3)Element Identifiers as Props
+4)Default Props values
+
+
+->***Now let's see the concept of Props are not forwarded to inner structure:-
+
+->See observe the CoreConcepts.jsx and Examples.jsx file:-in that in 'section' there is one title and below there is content in both files.
+
+->Now lets make seperate 'Section' custom component which returns 'title' and 'content'. because if think that our project structure till the end by adding more sections will look like this ,having one title and below some content,then just make one custom component.
+
+->Section.jsx file:-
+export default function Section({title,children}){
+    return(
+        <section>
+            <h2>{title}</h2> {/* set title dyamically(use title prop)*/}
+            {children}
+        </section>
+    );
+}
+
+->So here we want 'title' dynamically and the content also that will be sent by other Component function to Section Component.
+
+->Examples.jsx file:-
+Now just import 'Section' from 'Section.jsx' file in this file.
+
+->now change the <section id="examples"> to <Section id="examples"> just replace built-in  section with our custom Section.
+
+->Also we now no need of <h2>Examples</h2> in that because in our Section custom component we will be sending the 'title' as an custom prop to it.
+
+->so do:-
+<Section title={Examples} id="examples">
+
+->But now see in browser the styling will not be proper because we were applying 'id' on built-in section component, but now we are applying 'id' on custom section component.
+
+->****So in General in React, the props that we sent to custom components ,are not automatically forwarded to the JSX code used inside that component.
+
+->means see:-
+export default function Section({title,children}){
+    return(
+        <section>
+            <h2>{title}</h2> {/* set title dyamically(use title prop)*/}
+            {children}
+        </section>
+    );
+}
+->jo aaya aapde jetla props pass karsi ae directly forwarded nahi thai aa jsx code ne(return ni andar lakhelo che)
+
+->So the prop [id="examples"] that we are setting in our custom Section component in examples.jsx file will not be directly forwarded to the built-in section component in Section.jsx file 
+
+
+->So basically the scene is happening here is that , 'id' prop that is set in examples.jsx file in custom component Section is ignored by the react in built-in component section in Section.jsx file.
+
+->So that prop is to be explicitly pass to the Section Custom component.so do this styling be done back.
+
+->Understand the Scenario:-
+
+->Examples.jsx file:-         ->Section.jsx file:-
+<Section id="examples" />      <section> ... </section>
+
+->Examples.jsx file:-         ->Section.jsx file:-
+<Section id="examples" />       <section id={id}}
+
+->Now just explicitly set the 'id' prop passed by the 'Section' custom component in built in 'section' component:-
+export default function Section({title,id,children}){
+    return(
+        <section id={id}>
+            <h2>{title}</h2> {/* set title dyamically(use title prop)*/}
+            {children}
+        </section>
+    );
+}
+
+->Now we cannot use this approach because if we want to set multiple props passed by the custom component to the built-in component in JSX code then we need to destructure this props more and more .
+
+->eg:-
+let's say we want to also pass the 'className' as an prop to the built-in component from Custom component then:-
+
+->Examples.jsx file:-
+<Section title={examples} id="examples" className='Example'>
+
+->Section.jsx file:-
+export default function Section({title,id,className,children}){
+    return(
+        <section id={id} className={className}>
+            <h2>{title}</h2> {/* set title dyamically(use title prop)*/}
+            {children}
+        </section>
+    );
+}
+->Now this is not the convinient way to destruture the props like this:-
+
+->So React Provides the built-in forward Props which are used to receive the remaining props send by the custom component.
+
+->See like this now we have to do:-
+export default function Section({title,children,...props}){
+    return(
+        <section {...props}>
+            <h2>{title}</h2> {/* set title dyamically(use title prop)*/}
+            {children}
+        </section>
+    );
+}
+->***Now see remove the 'id','className' that extra props send by the custom component. and add this built-in react forward props in that :- (...props) <---like this and see the name is upto us but the three dots are complusory.
+
+->***See this (...) Javascript feature is called 'Rest' Property. This syntax will take the remanining props from the custom components and will group them into a new object.
+
+->just set the {...props} in <section> built-in component as above shown.
+
+->Now come to the TabButton.jsx file:-Here also we can use the concept of 'forward' props 
+->see here :-
+export default function TabButton({children,isSelected,onSelect}){
+    return(
+        <li>
+            <button className={isSelected ? "active" : undefined} onClick={onSelect}>
+                {children}
+                </button>
+        </li>
+    );
+}
+->Instead of receving the 'onSelect' prop, we can directly write the '...props' to receive all the remaining props sent by the Custom component to built-in button.So to make function more wrapped and clear.
+
+->so instead of above replace this things:-
+export default function TabButton({children,isSelected,...props}){
+    return(
+        <li>
+            <button className={isSelected ? "active" : undefined} {...props}>
+                {children}
+                </button>
+        </li>
+    );
+}
+->{...props} in place of 'onClick={onSelect}'
+
+->Now also make sure to make changes in the Examples.jsx file:-
+there instead of passing onSelect={()=>handleSelect('component')} we will write direct 'onClick' in place of 'onSelect' because that will be prop that is actually to be applied on the built-in component.
+
+like this:-
+<TabButton isSelected={selectedTopic === 'components'} onClick={()=>handleSelect('components')}>Components</TabButton>
+
+
+->Now let's understand the concept of Working with Multiple JSX Slots:-
+
+->Now as we seen the 'Section' as an custom component,now same way we will see about the next custom component is the 'Tabs' component for managing all this 'Tabs' in <menu></menu> in Examples.jsx file.
+
+->Now see our Custom 'Tabs' Component will have menu bar, under that tab buttons and at last the content:-
+
+->so Tabs.jsx file:-
+export default function Tabs({children}){
+    return(
+        <>
+        <menu>
+        {/* Here all the tab buttons should be displayed */}
+        </menu>
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children} <--- here the content that will be passing between the opening and closing tags of component.
+        </>
+    );
+}
+
+->Examples.jsx file:-
+<Tabs>
+                { !selectedTopic ? <p>Please Select a Topic</p> : null} {/* <---- this is called ternary operator*/}
+              {selectedTopic ?  <div id='tab-content'>
+                <h3>{EXAMPLES[selectedTopic].title}</h3>
+                <p>{EXAMPLES[selectedTopic].description}</p>
+                <pre>
+                  <code>
+                  {EXAMPLES[selectedTopic].code}
+                  </code>
+                </pre>
+              </div> : null}
+</Tabs>
+
+->see here the 'content at the last' that we want to displayed in Tabs component is now set. see we have send that content between opening and closing tags of 'Tabs' custom component.Now we have to see for the 'Tab buttons'.
+
+->Now if we set the those TabButtons inside the <menu></menu> in Tabs.jsx file:- like this
+
+->export default function Tabs({children}){
+    return(
+        <>
+        <menu>
+        {/* Here all the tab buttons should be displayed */}
+        <TabButton isSelected={selectedTopic === 'components'} onClick={()=>handleSelect('components')}>Components</TabButton>
+        <TabButton isSelected={selectedTopic === 'jsx'} onClick={()=>handleSelect('jsx')}>JSX</TabButton>
+        <TabButton isSelected={selectedTopic === 'props'} onClick={()=>handleSelect('props')}>Props</TabButton>
+        <TabButton isSelected={selectedTopic === 'state'} onClick={()=>handleSelect('state')}>States</TabButton>
+        </menu>
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children}
+        </>
+    );
+}
+
+->Now here the problem will come that again we have to set the extra props like handleClicks,isSelected prop etc so it will not be convinient way if we add those as an parameter in the Component custom 'Tabs'.
+
+->**Now instead of passing that all custom 'TabButtons' inside the menu in the Tabs.jsx file,we will pass the JSX code as an value to this custom 'Tabs' Component.
+
+
+->***JSX code in the end are just regular values that can be used as an values in the code.
+
+->like this:-examples.jsx file
+<Tabs buttons={   //like this we can pass those custom TabButtons as an values
+                <>
+              <TabButton isSelected={selectedTopic === 'components'} onClick={()=>handleSelect('components')}>Components</TabButton>
+              <TabButton isSelected={selectedTopic === 'jsx'} onClick={()=>handleSelect('jsx')}>JSX</TabButton>
+              <TabButton isSelected={selectedTopic === 'props'} onClick={()=>handleSelect('props')}>Props</TabButton>
+              <TabButton isSelected={selectedTopic === 'state'} onClick={()=>handleSelect('state')}>States</TabButton>
+              </>
+              }>
+content...
+</Tabs>
+
+->Now in Tabs.jsx file:-
+export default function Tabs({children,buttons}){
+    return(
+        <>
+        <menu>
+        {/* Here all the tab buttons should be displayed */}
+        {buttons}
+        </menu>
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children}
+        </>
+    );
+}
+
+
+->**Now let's see the extra concept for this 'menu' element(built-in) in Tabs.jsx file:-
+
+->Now see we are wrapping this custom 'Tabbuttons' in 'menu'(built-in) component in this case(smaller applications). Now if we want to wrap this tabbutons around other elements/components to make it flexible,use as any part of the application then there are two ways to do it:-
+
+
+1)First way:-
+remove the 'menu' in Tabs.jsx file
+and add <menu></menu> in place of <></> in Examples.jsx file:-
+
+like this:-
+Tabs.jsx file:-
+export default function Tabs({children,buttons}){
+    return(
+        <>
+        {/* Here all the tab buttons should be displayed */}
+        {buttons}
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children}
+        </>
+    );
+}
+
+->Examples.jsx file:-
+ <Tabs buttons={   //like this we can pass those custom TabButtons as an values
+                <menu>
+              <TabButton isSelected={selectedTopic === 'components'} onClick={()=>handleSelect('components')}>Components</TabButton>
+              <TabButton isSelected={selectedTopic === 'jsx'} onClick={()=>handleSelect('jsx')}>JSX</TabButton>
+              <TabButton isSelected={selectedTopic === 'props'} onClick={()=>handleSelect('props')}>Props</TabButton>
+              <TabButton isSelected={selectedTopic === 'state'} onClick={()=>handleSelect('state')}>States</TabButton>
+              </menu>
+              }>
+content...
+</Tabs>
+
+2)Second way:-
+first keep as it is:-means as it was before don't do that we have done above.
+
+->Now if we want to allow developer which wrapper element should be used, if the Tabs Component is used in different places of application.
+
+->**So we have to accept the extra prop i.e 'buttonsContainer'(name is upto us),the idea of using this prop is to get the element that should be used as an wrapper .
+
+->***So now just go to 'Examples.jsx' file:-
+ <Tabs buttonContainer='menu' buttons={ ...
+
+->see like this we have set the additional prop and its value will be always in "", not in {}.
+
+->here value that will be using will built-in elements/components or the custom components.
+->for eg:-
+buttonContainer='div' --->built-in component
+buttonContainer={Section} ---->custom component
+
+->****See here the difference is that Custom components are passed as an Dynamic values means in curly braces only {}, and the built-in components are passed in (commas)"" only
+
+->Now in Tabs.jsx file:-
+export default function Tabs({children,buttons,buttonContainer}){
+    return(
+        <>
+        <buttonContainer>
+        {/* Here all the tab buttons should be displayed */}
+        {buttons}
+        </buttonContainer>
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children}
+        </>
+    );
+}
+->***if we just write the prop that is used as an wrapper to wrap those Tabbuttons then React will treat it as an built-in component, as it is starting with lowercase character.
+
+->****So instead of this first stored the value of that prop into some variable(name same) just start with uppercase character and then write:-
+
+
+->Tabs.jsx file:-
+export default function Tabs({children,buttons,buttonContainer}){
+
+    const ButtonContainer=buttonContainer;
+
+    return(
+        <>
+        <ButtonContainer>
+        {/* Here all the tab buttons should be displayed */}
+        {buttons}
+        </ButtonContainer>
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children}
+        </>
+    );
+}
+->Now it will work successfully.because now react will treat it as an custom component.
+
+->******Hence now we are able to dynamically set the wrapper that should be used to wrap other elements/components
+
+
+->*****We can also use the shortcut:- 
+instead of storing the value of the prop into variable that start with uppercase character we can directly write that variable name only to accept the prop value:-
+
+->Examples.jsx file:-
+<Tabs ButtonContainer='menu' (pass the variable starting with uppercase character directly)
+
+->Tabs.jsx file:-
+export default function Tabs({children,buttons,ButtonContainer}){
+    return(
+        <>
+        <ButtonContainer>
+        {/* Here all the tab buttons should be displayed */}
+        {buttons}
+        </ButtonContainer>
+        {/* here the actual content should be displayed of the topic of which button is selected */}
+        {children}
+        </>
+    );
+}
+
+
+->****See only two things to remember:-
+1)that additional prop must be usable as an custom component in the component that receives it as an props(our case tabs component), so it must start with Uppercase character or it should be start with lowercase and map to some const/variable and then used it as an custom component.
+2)pass Custom components as an dynamically under curly braces {} and built-in under "".
+
+
+->Now let's see the concept of default props:-
+
+->see take the above example only of this dynamic wrapper:-
+->in react we can also have the default values of the props i.e means if we do not pass anything(set the prop in one file) , then in other file that custom component function if we just receive the desired prop with some default value then it can also be valid.
+
+like this:-
+->examples.jsx file:-
+<Tabs buttons={
+         <TabButton isSelected={selectedTopic === 'components'} onClick={()=>handleSelect('components')}>Components</TabButton>
+        <TabButton isSelected={selectedTopic === 'jsx'} onClick={()=>handleSelect('jsx')}>JSX</TabButton>
+        <TabButton isSelected={selectedTopic === 'props'} onClick={()=>handleSelect('props')}>Props</TabButton>
+        <TabButton isSelected={selectedTopic === 'state'} onClick={()=>handleSelect('state')}>States</TabButton>
+}>
+   { !selectedTopic ? <p>Please Select a Topic</p> : null} {/* <---- this is called ternary operator*/}
+              {selectedTopic ?  <div id='tab-content'>
+                <h3>{EXAMPLES[selectedTopic].title}</h3>
+                <p>{EXAMPLES[selectedTopic].description}</p>
+                <pre>
+                  <code>
+                  {EXAMPLES[selectedTopic].code}
+                  </code>
+                </pre>
+              </div> : null}
+</Tabs>
+->Now remove the 'buttonContainer='menu''. no need to pass anything due to default prop value in Tabs.jsx file.
+
+->Tabs.jsx file:-
+export default function Tabs({buttons,children,buttonContainer='menu'}){
+    return(
+        <>
+        <buttonContainer>
+        {buttons}
+        </buttonContainer>
+        {children}
+        </>
+        );
+}
+->now just set the default value in 'buttonContainer'. and it can be either built-in or custom value can be set both.
+
+->Hence Default props values are mostly used only when we know that the specific element will have desired value most of the time.
+
+
+
+
+
+->//udemy proper example
+
+// Button.jsx file.
+export default function Button({mode='filled',children}){
+    return(
+        <button>
+        {children}
+        </button>
+        );
+}
+ //see basically it returns built-in button and between opening and closing tag put the {children} prop means the content sent by the custom component to built-in component then the next necessary prop we need to pass is that the 'mode' prop from which we can know whether the button is 'filled',' outline' and so on.
+ 
+ export default function Button({mode='filled',children}){
+     
+     let cssClasses=`button ${mode}-button`;
+     
+    return(
+        <button className={cssClasses}>
+        {children}
+        </button>
+        );
+}
+//we have already index.css file in which there is css of all buttons
+//first of all we have to add the css of 'class=button' as a normal css 
+//then we have to add the css of additional classes like 'button-icon','filled-button' etc hence that why we have written cssClasses=`button ${mode}-button`
+
+//now it is told that built-in buttons should be able to receive the extra props send by the custom component Button so we will apply the concept of forward props 
+
+ export default function Button({mode='filled',children,...props}){
+     
+     let cssClasses=`button ${mode}-button`;
+     
+    return(
+        <button className={cssClasses} {...props}>
+        {children}
+        </button>
+        );
+}
+
+//now the thing is that that props also may have the other classnames so just we have to merge them with the cssClasses
+// so just do it like this:-
+ export default function Button({mode='filled',children,...props}){
+     
+     let cssClasses=`button ${mode}-button`;
+     
+     if(props.className){
+         cssClasses+= ' ' + props.className;
+     }
+     
+    return(
+        <button className={cssClasses} {...props}>
+        {children}
+        </button>
+        );
+}
+
+//now there is also that the custom button should allow the Icons to be visible so there is 'Icon' prop passed as an value to the Button component with the className
+// To make sure the icon becomes visible (if passed correctly to the component & used in there), wrap the icon component in the button with a <span> that has the class "button-icon" on it.
+export default function Button({mode='filled',Icon,children,...props}){
+     
+     let cssClasses=`button ${mode}-button`;
+     
+     if(props.className){
+         cssClasses+= ' ' + props.className;
+     }
+     
+    return(
+        <button className={cssClasses} {...props}>
+        // wrapping icon inside the span tag
+        <span className='button-icon'> {Icon} </span>
+        {children}
+        </button>
+        );
+}
+//if we write this much <span className='button-icon'> {Icon} </span> then there will be 2 test cases failed that are :-Button should display the icon if the Button has Icon prop and Button should not display the icon if it does not have the Icon Prop 
+//so now do like this:-write this instead of that statement
+{Icon && (<span className='button-icon'> </Icon> </span>)}
+
+//the above statement means if there is an 'Icon' prop then wrap the Icon inside the span tag with proper className. Now we have written '</Icon>' instead of {Icon} because if we write that then we will get the error
+
+export default function Button({mode='filled',Icon,children,...props}){
+     
+     let cssClasses=`button ${mode}-button`;
+     
+     if(props.className){
+         cssClasses+= ' ' + props.className;
+     }
+     
+    return(
+        <button className={cssClasses} {...props}>
+        // wrapping icon inside the span tag
+       {Icon && (<span className='button-icon'> </Icon> </span>)}
+        {children}
+        </button>
+        );
+}
+now it is okk
+
+//now just add the last thing that if there is Icon then add 'icon-button' class in cssClasses
+//so just do write before the return statement:-
+ if(Icon){
+         cssClasses+= 'icon-button';
+     }
+
+
+
+
+->Tic-Tae-Toe game:-New React project
+->See first let's build the header:-Simple tic-tae-toe image and below its title.
+
+->Now Remember Uptill now we were doing that if the things are repeating then just make one custom component and export it and import it inside the app.jsx file.
+->Also we were doing that if the things are not repeating then also we were making custom components which is not needed. All Content must not go into the components.
+
+->now jus have a look in the 'index.html' file which will be served to the browser.now there we can make the header thing like this above the <div id="root"></div>:-
+
+
+->index.html file:-
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/game-logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Tic-Tac-Toe</title>
+  </head>
+  <body>
+    <header>
+      <img src="/game-logo.png" alt="">
+      <h1>Tic-Tae-Toe</h1>
+    </header>
+    <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>
+
+->****see the main intution is that the things that are static(not going to change) must not make a separate component, instead just write its logic inside the html file directly.if the things are dynamic(going to change) then definitely make the component of it.
+
+
+
+->Now let's come to main game:-
+1)See first we have to build main buidling blocks that are:-
+1. the part where we can see the player names and can also edit them 
+2.Gaming board
+3.in bottom we should get the game information
+
+
+->****Let's start with the PLayer Part:-writing and editing player names:-
+
+->Now in app.jsx file:-
+
+function App() {
+  return (
+    <main>
+      <div className="game-container">
+      {/* Players */}
+      <ol id='players'>
+        <li>
+          <span className="player">
+          <span className="player-name">Player 1</span>
+          <span className="player-symbol">X</span>
+          </span>
+          <button>Edit</button>
+        </li>
+        <li>
+          <span id="player">
+          <span className="player-name">Player 2</span>
+          <span className="player-symbol">O</span>
+          </span>
+          <button>Edit</button>
+        </li>
+      </ol>
+
+      {/* Game Board */}
+      </div>
+      {/*  Log */}
+    </main>
+   
+  );
+}
+
+export default App;
+
+->till here first understand.
+->***We have used the ordered list <ol> because in game we want that player-1 should come first then player-2.
+->***Now observe this thing:-
+<li>
+          <span id="player">
+          <span className="player-name">Player 2</span>
+          <span className="player-symbol">O</span>
+          </span>
+          <button>Edit</button>
+        </li>
+->this thing is repeating again so as we know make the custom component of it:-
+
+
+->Make the components folder,under that player.jsx file:-
+export default function player({name,symbol}){
+    return(
+        <li>
+          <span id="player">
+          <span className="player-name">{name}</span>
+          <span className="player-symbol">{symbol}</span>
+          </span>
+          <button>Edit</button>
+        </li>
+    );
+}
+->see we have to change the names dynamically so we have used the concept of props.
+
+
+->now let's work upon 'edit' button :-
+->on clicking it ,allows the user to change the name.
+->also when in place of 'edit' the 'save' button should come.
+->so now again we will be using the 'state' concept which will cause react to reexecute the app function to update the UI because the data has been changed.
+
+
+->now in player.jsx file:-
+we have added this much:-
+import { useState } from "react";
+
+
+export default function player({name,symbol}){
+  
+    const [isEditing,setisEditing] = useState(false);
+
+
+
+    return(
+        <li>
+          <span id="player">
+          <span className="player-name">{name}</span>
+          <span className="player-symbol">{symbol}</span>
+          </span>
+          <button>Edit</button>
+        </li>
+    );
+}
+
+->Now this are exercise tasks :-
+1)we need to add the function that will be executing whent the button is triggered.
+2)change the value of 'isEditing'  to true
+3)when isEditing is false show this <span className="player-name"
+4)when isEditing is true show this <input> element(it should not work if the isEditing is true)
+
+
+
+->Now see in player.jsx file:-
+import { useState } from "react";
+
+
+export default function Player({name,symbol}){
+  
+    const [isEditing,setisEditing] = useState(false);
+
+    function handleEditClick(){
+      setisEditing(true);
+    }
+
+
+
+    return(
+        <li>
+          <span id="player">
+          <span className="player-name">{name}</span>
+          <span className="player-symbol">{symbol}</span>
+          </span>
+          <button onClick={handleEditClick}>Edit</button>
+        </li>
+    );
+}
+
+
+
+->Now see in app.jsx file:-
+import Player from "./components/player";
+function App() {
+  return (
+    <main>
+      <div id="game-container">
+      {/* Players */}
+      <ol id='players'>
+        <Player name="Player-1" symbol="X" />
+        <Player name="Player-2" symbol="O" />
+      </ol>
+
+      {/* Game Board */}
+      </div>
+      {/*  Log */}
+    </main>
+   
+  );
+}
+
+export default App;
+->see here we have use the concept of state.
+
+->Now the thing next we have to do is that we have to show this statement "<span className="player-name">{name}</span>" conditionally means we have to use the value of state to show conditionally statements.
+
+->if {isediting=true} then show input statement otherwise show the same statement.
+
+->so now see in player.jsx file:-
+ let playerName=<span className="player-name">{name}</span>;
+
+    if(isEditing){
+      playerName= <input type="text" value={name} required/>
+    }
+
+
+    return(
+        <li>
+          <span id="player">
+          {playerName}
+          ......
+
+->we have add one variable that will be conditionally show the statements based on value of state variable.
+
+
+->*****The main powerful concept of the react is that see first observe that when we click on 'edit' for player-1 it shows us the input statement but see for  second player then it will not show us the input statement,it still shows the "player-2" for it.this is the imp thing.
+
+->See eventhough we are using same custom component 'Player',also the logic is same for both then also for both player, there is isolation between them,it means when we use the custom again and again then every time the react will make new isolated instance. so eventhough both the players use the same 'PLayer' component they work totally isolated from each other.
+
+->**if the 'state' variable in first component(instance) changes then the second component(instance) will not care about at all.
+
+->****See this powerful react feature of 'isolation' allows you to build super complex reusable components which do not interfere with each other.
+
+->*****example for above is that we dont want that when i click on 'edit' for player-1 then it would also change for player-2. Then that will be useless.
+
+
+->**Now the second thing that we want that when we click on 'Edit' then two things we would see is that first is input statement that logic we have done above , and the second thing is that in place of 'Edit' , we should see the 'Save'.
+
+->***Now for this there are two ways:-
+1)using variable:-
+->just do this:-
+let btnCaption='Edit';//1st way
+
+    if(isEditing){
+      playerName= <input type="text" value={name} required/>
+     btnCaption="Save";
+    }  
+return(
+        <li>
+          <span id="player">
+          {playerName}
+          <span className="player-symbol">{symbol}</span>
+          </span>
+          <button onClick={handleEditClick}>{btnCaption}</button>
+</li>
+);
+}
+
+2)Using ternary expression:-
+->just no need to use any variable,direct between <button></button>->use this:-
+
+ <button onClick={handleEditClick}>{isEditing ? 'Save' :'Edit'}</button>
+
+->means if 'isEditing' is true then show 'Save' otherwise 'false'.
+
+
+->***Now another thing we have to do modification is that, we should switch between the 'Edit' and 'Save'. means if click on 'Edit' and after editin player name  when we click on 'Save' then again we should get the 'Edit' and vice-versa.
+
+->so for that use dynamically approach:-means if the isEditing is true make it false and vice-versa.
+function handleEditClick(){
+      setisEditing(isEditing ? false :true);
+    }
+
+->****we can also use the shortcut here. Javascript provides the representation in boolean values like this:-
+
+->instead of writing 'true' or 'false' writed directly this:-
+
+ setisEditing(!isEditing);
+
+
+->******Now this is also not perfect. In React if we wanna update the state value based on the previous value, then instead of passing a new value , pass an function to your state updating function.
+
+eg:-
+setisEditing(!isEditing) -> not true if the state variable depends upon previous value then you should not pass an new value to it.
+
+setisEditing((wasEditing) => !isEditing) -> true.
+instead pass the function to your state updating function.
+
+->Why?? because when we pass the function to it, it will be called by React and automatically will receive the current state value as an input.
+
+->What's the problem with this:-setisEditing(!isEditing);
+->the problem is that React does not update the value of state instantly but it will update it in future.
+->In most of the cases the state updates still are executed instantly. Now see here future means (1 or 2 milliseconds after that it updates)
+
+
+->***Now the another problem is with this statement:-
+ playerName= <input type="text" value={name} required/>
+
+->see here we have use the 'value={name}' which will be default value over there, but if we try to edit it , we can't do that.
+
+->Soln for this above problem:-
+1)Set the Special prop i.e 'defaultValue' prop. by applying that we can now edit that value.
+
+->but the problem with this approach is that when we edit it and try to save it we will not get that edited name instead we will get that intial name only.
+
+->***By the way we will use different approach:-
+because we just don't want to edit it but also want that edited name to be saved.
+
+->so now make 'value' instead of 'defaultValue' over there. and now we will use again the concept of state here.
+
+->****See in react we can use the state as many times we want.
+
+
+->***Now do this changes in app.jsx and player.jsx files:-
+
+->export default function Player({Intialname,symbol}){
+....);
+}
+->here change the 'name' prop to 'Initalname' prop and do the changes in the name of setting props in app.jsx file like this:-
+ <Player Intialname="Player-1" symbol="X" />
+ <Player Intialname="Player-2" symbol="O" />
+
+
+->above the handleEditClick() function:-
+ const [playerName,setPlayerName] = useState(Intialname);//for saving the player name
+
+->edit your handleEditClick() function:-
+function handleEditClick(){
+      // setisEditing(isEditing ? false :true);
+      //or 
+      // setisEditing(!isEditing);see this is also not true see in notepad
+      setisEditing((editing)=>!isEditing);
+    }
+
+->then change the variable names:-
+ let editablePlayerName=<span className="player-name">{playerName}</span>;
+    // let btnCaption='Edit';//1st way
+
+    if(isEditing){
+      editablePlayerName= <input type="text" value={playerName} required/>
+      // btnCaption="Save";
+    }
+
+->last is in  <li></li> tag:-
+ <span id="player">
+          {editablePlayerName}
+	  .....
+</span>
+
+
+->****Now after this working upon the updating the state whenever we write in input:-
+
+->Now we will need one another function which will do this work:-
+->see this are changes that we have done:-
+if(isEditing){
+      editablePlayerName= <input type="text" value={playerName}  onChange={handleChange}  required/>
+      // btnCaption="Save";
+    }
+
+ function handleChange(event){
+      // console.log(event);
+      setPlayerName(event.target.value);
+    }
+
+->Just we have use the built-in prop 'onChange' provided by the react which means when we enter new value(means change the value) react will call the 'handleChange' function and will pass the entered value as an parameter to this function,which will be defined as an 'event' in javascript that we know, and then it through that it will target the value.
+
+->here the event.target means the element which is doing the current event and changing the name. now also we have written event.target.value means we want that value entered by the user, so we can set(save) that value for the player.
+
+->******see till here we learnt the concept of two-way binding.
+
+
+->Now till here the player functionality is over for a moment further if there are any changes we will do it.
+
+
+
+
+
+->******Now moving to our next building block that is Game-Board:-
+->make new file gameBoard.jsx.
+
+
+->Now we want this type of structure:-
+export default function GameBoard(){
+    return(
+        <ol id="game-board">
+            <li>{/*1st row */}
+                <ol>
+                    <li></li> {/*1st col */}
+                    <li></li> {/*2nd col */}
+                    <li></li> {/*3rd col */}
+                </ol>
+            </li> 
+            <li></li> {/*2nd row */}
+            <li></li> {/*3rd row */}
+        </ol>
+    );
+}
+
+->but the problem is that we want this board to be derived dynamically,means when we click this squares inside the board they should be updated dynamically.
+
+->instead of directly making this structure inside this component function we will make structure of initial board outside the component function.
+
+like this:-
+const initialBoard=[
+    [null,null,null],
+    [null,null,null],
+    [null,null,null]
+];
+
+->now we will render this board dynamically by using map() method that we know:- so like this we can see:-
+
+<ol id="game-board">
+          {initialBoard.map((row,rowIndex)=><li key={rowIndex}> </li>)}
+        </ol>
+
+->see here using map method will take the arrow function which will call automatically and will  we will get each row first one by one, then we have to make list of the items inside the each row.
+
+->Also we know that map() needs 'key' which uniquely identifies the list items. but see here in this array of arrays(initialBoard) we can't see any great unique key, but as simple just pass the current index of each item in each row. that we can use it as an key.
+
+
+->now inside the list item, we will have another ordered list where we want to output the values of the inner arrays. means ke pehla aapde khali upar 3 rows malse,pachi have aapde ae ek ek row ni andar value che aena mate kari su.
+
+->so now this is the thing we want:-
+   <ol id="game-board">
+          {initialBoard.map((row,rowIndex)=><li key={rowIndex}>
+            <ol>
+                {row.map((col,colIndex)=><li key={colIndex}><button>{col}</button></li>)}
+            </ol>
+          </li>)}
+        
+        </ol>
+->have each row pakdse,pachi aeni andar jetli column hase ne ae o/p karse and aema pan unique key colIndex hase.pachi aeni andar button mukisu clickable,either X o/p thase or O o/p thase ane agar click nahi kari toh kai nahi thai. 
+
+->hence this will be our initial values between our button tags that initially there will be null, no 'X' or 'O' will be shown there. 
+
+->just replace the name from 'col' to 'playerSymbol':-
+ <ol id="game-board">
+          {initialBoard.map((row,rowIndex)=><li key={rowIndex}>
+            <ol>
+                {row.map((playerSymbol,colIndex)=><li key={colIndex}><button>{playerSymbol}</button></li>)}
+            </ol>
+          </li>)}
+        
+        </ol>
+
+->Now again we will use the concept of state to update the UI means when the user clicks on any of the squares then some o/p should be shown there.
+
+->add this in code:-
+
+    const [gameBoard,setgameBoard] =useState(initialBoard);
+
+    function handleSelectSquare(){
+        setgameBoard();
+    }
+
+->Now here the UI should be updated based on previous state means the state updating function(in our case is 'setgameBoard') should update the initialBoard based on previous state value.it means if the player clicks , let's say X is o/p now when the another player clicks then symbol O should be printed.
+
+-> function handleSelectSquare(rowIndex,colIndex){
+        setgameBoard((prevGameBoard)=>{
+            prevGameBoard[rowIndex][colIndex]='X';
+            return prevGameBoard;
+        });
+    }
+->see here the function needs some information about in which row and under that which col was clicked by the user and also the third info that we have not added here yet,which is about which player(x or o) has clicked that we will understand it later.
+
+->but this above is not the proper way.
+
+
+->******It is strongly recommended,that if the state variable is object or array, then we should update that state in immutable way. means first create a copy of that array/object and then update it.
+
+eg:-
+1)const updatedUser = user;
+user.name= 'Max';
+->see this is not true because we are here not making any copy.
+
+2)const updatedUser= {...user}
+updatedUser.name='Max'
+->See here we have created copy via javascript "spread" operator.
+
+->So in our case we will make one const array that will be new array, 'updatedBoard' could be the name, where we can use the spread operator to copy the all the values of previous(old) array in to this array.THis can be done using map method
+
+const updatedBoard= [...prevGameBoard.map(innerArray => [...innerArray])];
+->see here first 'innerArray' means row and second 'innerArray
+->now by doing this we will be storing the old gameboard(array) in this updatedBoard
+
+->now do updation in updated board:-
+updatedBoard[rowIndex][colIndex] = 'X;
+return updatedBoard;
+
+hence our gameBoard.jsx file uptill now will be like this:-
+import { useState} from "react";
+
+const initialBoard=[
+    [null,null,null],
+    [null,null,null],
+    [null,null,null]
+];
+
+export default function GameBoard(){
+
+    const [gameBoard,setgameBoard] =useState(initialBoard);
+
+    function handleSelectSquare(rowIndex,colIndex){
+        setgameBoard((prevGameBoard)=>{  
+            const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
+            updatedBoard[rowIndex][colIndex]='X';
+            return updatedBoard;
+        });
+    }
+
+
+    return(
+        <ol id="game-board">
+          {gameBoard.map((row,rowIndex)=><li key={rowIndex}>
+            <ol>
+                {row.map((playerSymbol,colIndex)=><li key={colIndex}><button onClick={()=>handleSelectSquare(rowIndex,colIndex)}>{playerSymbol}</button></li>)}
+            </ol>
+          </li>)}
+        
+        </ol>
+    );
+}
+
+
+
+->******Now lets' see the concept of Lifting the State up:-
+
+->Now see we want that player to be highlighted as it turns comes.we want to add 'active' class to the players when it chance comes.
+
+->**We need to know the current active player in 'player' and 'gameboard' components, because see in 'player' component there should be css 'active' class added to the player which is active and in gameBoard component,we need to o/p the respective symbol of the active player. 
+
+->******see both components are separate so instead of managing the information about the current active player in both the components we will do the lifting the state up,i.e
+we will need to manage the state in the closest ancestor component,that has access to both the components that need that information. so in our case is the App() component. Beacause App() component can pass the information that is needed by both the components via props.
+
+->so in App.jsx file add concept of state:-
+ const [activePlayer,setactivePlayer] = useState('X');//let intial value of state variable be 'X'
+
+  function handleSelectSquare(){
+    setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+  }
+->till here understand it.(it is simple only!!)
+
+
+->now we have to ensure that this function handleSelectSquare should get executed when the particularly the square is selected, and also that square should select in gameboard component. 
+
+->just pass this 'handleSelectSquare' function as an prop to the 'gameBoard' component first.
+->like this:-
+export default function GameBoard({onSelectSquare}){ <------this one
+
+    const [gameBoard,setgameBoard] =useState(initialBoard);
+
+    function handleSelectSquare(rowIndex,colIndex){
+        setgameBoard((prevGameBoard)=>{  
+            const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
+            updatedBoard[rowIndex][colIndex]='X';
+            return updatedBoard;
+        });
+
+onSelectSquare(); <-------this one(inside the handleSelectSquare function we have call onSelectSquare)
+    }
+
+    return(
+        <ol id="game-board">
+
+
+->App.jsx file:-
+ {/* Game Board */}
+      <GameBoard onSelectSquare={handleSelectSquare}/>
+here 'handleSelectSquare' function means this one:-
+function handleSelectSquare(){
+    setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+  } <------in app.jsx file.
+
+->See dont confuse there are two 'handleSelectSquare' function in app.jsx file and also in gameboard.jsx file.
+
+
+
+->we have call inside the handleSelectSquare function because this handleSelectSquare funciton is triggered if the a square was selected by clicking this button.
+
+->****SO in the end we are executing onSelectSquare function defined outside the gameBoard component from inside this gameBoard component. because the value for this onSelectSquare prop.
+
+->****see tracking of this above task:-
+pehla 'gameBoard' component function ni andar jem button click thase means ke koi pan square select thase , tyare 'handleSelectSquare' function execute thase 'gameBoard' component function ni andar che ae. pachi aapde 'onSelectSquare' as an prop tarike pass kairu che, toh ae function(as an prop) aapde execute karisu 'gameBoard' component function ni andar. pachi ae directly 'app' component function ni andar thi execute thase ane if the player 'X' hase toh aene 'O' kari nakhse.
+
+
+->in App.jsx file:-
+now add the classname="highlight-player" to the <ol id="players" ...> and then now we have to work upon passing the information in player.jsx file from app.jsx file about which player is active.
+
+->First lets pass the information about active-player to player.jsx file:-
+like this way:-
+ <ol id='players' className="highlight-player">
+        <Player Intialname="Player-1" symbol="X" isActive={activePlayer === 'X'}/>
+        <Player Intialname="Player-2" symbol="O" isActive={activePlayer === 'O'}/>
+ </ol>
+->here we are passing the third prop that is boolean prop means if the player active is 'X' then isActive=true otherwise false and same way for player 'O'.
+
+->now lets pass information to gameboard component:-
+->like this way:-
+<GameBoard onSelectSquare={handleSelectSquare} activePlayerSymbol={activePlayer}/>
+->here we are passing the second prop about which symbol to printed on gameboard for respective active player.
+
+
+->Now do changes in player.jsx file:-
+export default function Player({Intialname,symbol , isActive}){ <---- here just receive that third boolean prop.
+
+and this one:-
+    <li className={isActive ? "active" : undefined}>
+
+
+->Now in gameboard.jsx file:-
+export default function GameBoard({onSelectSquare, activePlayerSymbol}){ <---receive that second prop about playerSymbol
+
+->and edit this one:-
+updatedBoard[rowIndex][colIndex]=activePlayerSymbol;
+
+
+
+
+->Now make another component that is our third building block "Log" Component. Make Log.jsx file.
+
+->the idea behind making this Log component is show the player status. Means who's player's turn is there <--- this we have to show.
+
+->So now for this we have to dynamically manage the array of turns, an array which grows with every button click.
+
+->****Again we have to use the concept of Lifting the state up, because see the above task that is managing the array cannot be done in "Log.jsx" file. It can be only done in "app.jsx" file. Because this can only send that which player's turn is there and which symbol is printed, as it has access to both the file gameboard.jsx file and log.jsx file.
+
+
+->so in app.jsx file:-
+const [gameTurns,setGameTurns] =useState([]);
+
+so whenever the square is being selected in gameboard then we will add the new turn in this array(gameTurns).
+
+->now the state updating function must be called inside the handleSelectSquare() function. so that the new turn is added in the array.
+
+->in app.jsx file:-
+function handleSelectSquare(){
+    setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+    setGameTurns();
+  }
+
+->now we have to ensure that to get the information about turns that took place in this app.jsx file.
+
+->***But see this is useless because see in gameboard.jsx file there is an already one state variable which also manages the information about the turns that took place but in some another way.see in that gameBoard.jsx file there we edit/updating the gameboard on every click on the button.
+
+->**see from that component we get many information about which player is active, which button was clicked, which symbol is printed.just we dont know in which order the buttons were clicked.
+
+->***Now see here in app.jsx file we are adding one another state which manages the same kind of information with just little bit extra data so this should be avoid by the react developer.
+
+->so managing same data with multiple states must be avoid by the  react developer.
+
+
+->****So instead of having this gameBoard State and this GameTurns state , it is necessary to lift that state up from the gameboard component to app component and app component passes the information to both the components i.e gameboard and log component.
+
+
+->***So now we have not to lift the gameboard state up because it does not contain the information about the order in which the buttons were clicked. And this is the imp information for the Log component.
+
+
+->****So keep that gameturns state in app.jsx file and comment/delete the gameboard state from the gameboard.jsx file.
+
+
+->***so in gameboard.jsx file:- we have commented out this part:-
+
+export default function GameBoard({onSelectSquare}){
+
+    // const [gameBoard,setgameBoard] =useState(initialBoard);
+
+    // function handleSelectSquare(rowIndex,colIndex){
+    //     setgameBoard((prevGameBoard)=>{  
+    //         const updatedBoard = [...prevGameBoard.map(innerArray => [...innerArray])];
+    //         updatedBoard[rowIndex][colIndex]=activePlayerSymbol;
+    //         return updatedBoard;
+    //     });
+
+    //     onSelectSquare(); 
+    // }
+ .....
+
+)};
+
+->Now just leave this gameboard component for a while and come into the app component.
+
+->In that we have to use the gameTurns state for lifting the state up.
+
+
+->in app.jsx file:-
+
+
+
+->see here we know that if the state value's depends upon the previous state value then we have to use the functional approach that's why we have written :-
+
+setGameTurns(prevTurns => {
+    const updatedTurns = [...prevTurns]
+    });
+because the new turns array will depend upon the old turns array. Now we want a new entry to be passed in this turns array, so for that we have make constant variable in which we pass the old turns array, because we know if the state variable is an array/object update it in immutable way.
+
+
+->***Now i want to insert the new turn, so the information about which player clicked which button, in front of old turns. so the first item in the array is the latest turn.
+
+->***now the question is that how we can store the information about single turn in our game? there can be many ways to implement it, but we will use "object" so that our gameTurns state will eventually be an array full of objects, and we want to know which player click on which square and square can be identified by the row and col index.
+
+->**so in our handleSelectSquare function we will pass rowIndex and colIndex as an parameters.
+
+->so till here in app.jsx file:-
+function handleSelectSquare(rowIndex,colIndex){
+    setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+    setGameTurns(prevTurns => {
+    const updatedTurns = [{square: {row:rowIndex , col:colIndex},player : activePlayer},...prevTurns]
+    });
+  }
+
+->****now see this one "player : activePlayer" is not optimal way to add the information about which player click which button, because we are updating the gameTurns state not the activePlayer state.because using this we are typically merging two different states.
+
+->***Now make sure that when the schedule state update is performed we are definately working with the latest state, but that we dont have for activePlayer because that's from a different state.
+
+->****therefore a better way for deriving the symbol of the currently activePlayer is to add a new variable in this state updating function 'setGameTurns'.
+
+->like this:-
+ if(prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+->now see another we have to also check whether the array is empty or not, because intially the array will empty so there must be atleast one turn so that we can know which player has click which button.
+
+->like this:- so just add 
+if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+->so uptill here:-
+ setGameTurns(prevTurns => {
+
+      let currentPlayer= 'X';
+
+      if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+    const updatedTurns = [
+{
+square: {row:rowIndex , col:colIndex},
+player : activePlayer
+},
+...prevTurns]
+
+return updatedTurns;
+    });
+  }
+
+
+->****Now let's see the concept of deriving states from props:-
+
+->in gameboard.jsx file:-
+
+let gameBoard=initialBoard;
+
+    for(const turn of turns){
+      const {square,player}=turns;
+      const {row,col}=square;
+
+      gameBoard[row][col]=player;
+    }
+
+we have added this.
+
+
+->See we have just pass the prop i.e "turns" from app.jsx file to gameBoard Component.Now we have to derive our gameboard from this "turns" array in such a way that it should be completely looked like array "intialBoard" that is array of arrays.
+
+->see we have to tranform turns array into such type of arrays.
+
+->Okk the process is:-
+->first we have taken the variable called "gameBoard" in gameBoard.jsx file.
+->assign "intialBoard" to that variable i.e our intial array of all values null.
+->then take "turn" from turns,as the squares are click and then just destructure the turns array.
+
+->first destructure like:-
+const {square,player} = turn;
+const {row,col}=square;
+
+then just update the "gameboard" array:-
+gameboard[row][col]=player; 
+
+->***So here we didn't manage any state here but just this process is called deriving state.
+
+->but doing after all this when we relaod our site then we will see errors and gameboard will disappear.Reason is that the function handleSelectSquare is not been called.so first that we have to call.
+
+
+->so handleSelectSquare function is in app.jsx file and it is passed as an prop to gameboard.jsx file(gameboard component).so when the button is click that handleSelectSquare function is called, but see it also needs parameters to be passed, so we have to pass rowIndex and colIndex to it to execute that function.
+
+->so we know that approach to call the function using arrow function:-
+
+->like this:-
+{row.map((playerSymbol,colIndex)=><li key={colIndex}><button onClick={()=>onSelectSquare(rowIndex,colIndex)}>{playerSymbol}</button></li>)}
+
+
+->Now let's work upon Log.jsx file:-
+
+->before that just pass the "turns" array from app.jsx file as an prop to "Log" component.
+
+->Log.jsx file:-
+export default function Log({turns}){
+    return(
+        <ol id="log">
+            {turns.map(turn=> <li key={`${turn.square.row}${turn.square.col}`}>{turn.player} selected {turn.square.row}.{turn.square.col}</li>)}
+        </ol>
+    );
+}
+
+->Now see here:-
+setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+    setGameTurns(prevTurns => {
+
+      let currentPlayer= 'X';
+
+      if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+->see we don't need to manage the "active player" now with the extra state, it is already done by the "gameTurns" state so just remove it and copy this gameturns state above at place of "activePlayer" state. and then at above just replace "prevTurns" with "gameTurns".
+
+->see we want that which player is "active" so that it can be get from the "gameTurns" state. so no need of "activePlayer" state.
+
+->like this:-
+let currentPlayer= 'X';
+
+if(gameTurns.length > 0 && gameTurns[0].player === 'X' ){
+  currentPlayer = 'O';
+}
+
+  function handleSelectSquare(rowIndex,colIndex){
+    //setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+    setGameTurns(prevTurns => {
+
+      let currentPlayer= 'X';
+
+      if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+    const updatedTurns = [
+    {
+      square: {row:rowIndex , col:colIndex},
+      player : activePlayer
+    },
+      ...prevTurns]
+
+      return updatedTurns;
+    });
+  }
+
+
+->so basically app.jsx file uptil now:-
+import Player from "./components/player";
+import GameBoard from "./components/GameBoard";
+import Log from "./components/Log";
+import { useState } from "react";
+
+function App() {
+
+ const [gameTurns,setGameTurns] =useState([]);
+
+// const [activePlayer,setactivePlayer] = useState('X');//let intial value of state variable be 'X'
+
+let currentPlayer= 'X';
+
+if(gameTurns.length > 0 && gameTurns[0].player === 'X' ){
+  currentPlayer = 'O';
+}
+
+  function handleSelectSquare(rowIndex,colIndex){
+    // setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+    setGameTurns(prevTurns => {
+
+      let currentPlayer= 'X';
+
+      if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+    const updatedTurns = [
+    {
+      square: {row:rowIndex , col:colIndex},
+      player : activePlayer
+    },
+      ...prevTurns]
+
+      return updatedTurns;
+    });
+  }
+
+
+  return (
+    <main>
+      <div id="game-container">
+      {/* Players */}
+      <ol id='players' className="highlight-player">
+        <Player Intialname="Player-1" symbol="X" isActive={activePlayer === 'X'}/>
+        <Player Intialname="Player-2" symbol="O" isActive={activePlayer === 'O'}/>
+      </ol>
+
+      {/* Game Board */}
+      <GameBoard onSelectSquare={handleSelectSquare} turns={gameTurns}/>
+      </div>
+      {/*  Log */}
+      <Log turns={gameTurns}/>
+    </main>
+   
+  );
+}
+
+export default App;
+
+
+->here we are deriving the "activeplayer":-
+setGameTurns(prevTurns => {
+
+      let currentPlayer= 'X';
+
+      if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+
+->so that's why instead of having dedicated state here we will use the derived state.
+
+
+->see this:-
+setGameTurns(prevTurns => {
+
+      let currentPlayer= 'X';
+
+      if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+        currentPlayer = 'O';
+      }
+->we can't read off this because we need to derive the state from the old game turns state.(past ma su hatu aena uparthi state ni value change karse).
+
+->while here in app component i.e this:-
+let currentPlayer= 'X';
+
+if(gameTurns.length > 0 && gameTurns[0].player === 'X' ){
+  currentPlayer = 'O';
+}
+we derive state from the current gameTurns state.(hamna current su che aema j directly update kari dese)
+
+
+->for that let's make one function i.e helper() function, which will not need any access to the state or any other data related to the component and it also should not be re-created when the component function re-executes.
+
+->make this function outside the app component but in app.jsx file:-
+
+function deriveActivePlayer(gameTurns){
+  let currentPlayer= 'X';
+
+  if(gameTurns.length > 0 && gameTurns[0].player === 'X' ){
+  currentPlayer = 'O';
+  }
+
+  return currentPlayer;
+}
+
+
+->now inside the app component:-
+function App() {
+
+ const [gameTurns,setGameTurns] =useState([]);
+
+// const [activePlayer,setactivePlayer] = useState('X');//let intial value of state variable be 'X'
+
+  const activePlayer = deriveActivePlayer(gameTurns); <--- this one
+
+  function handleSelectSquare(rowIndex,colIndex){
+    // setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+    setGameTurns(prevTurns => {
+
+      // let currentPlayer= 'X';
+
+      // if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
+      //   currentPlayer = 'O';
+      // }
+
+      const currentPlayer = deriveActivePlayer(prevTurns); <----this one
+
+
+    const updatedTurns = [
+    {
+      square: {row:rowIndex , col:colIndex},
+      player : activePlayer
+    },
+      ...prevTurns]
+
+      return updatedTurns;
+    });
+  }
+
+
+
+->Now we let's work upon disabiling buttons conditionally:-
+->if the particular square is selected then it should not be reselected multiple times.
+
+->see if we use built-in html property "disabled" on button then every buttons will be disabled. so we want to disabled it dynamically.
+
+->just see whether the playerSymbol=='X' or 'O' then it will be selected it if it is null then it will disabled.Simple!!!!!
+
+->so in gameBoard.jsx file:-
+ {row.map((playerSymbol,colIndex)=><li key={colIndex}><button onClick={()=>onSelectSquare(rowIndex,colIndex)} disabled={playerSymbol!=null}>{playerSymbol}</button></li>)}
+
+
+***->Now we are at the last part of the game that is "Game Over" .
+->Now there are many possible winning combinations:-
+
+->so now this part will be done again in app component because there only we have to show the "Game Over" Message over there and also we will come to know which player win. 
+
+***->so for that let's make one array:-
+ const WINNING_COMBINATIONS = [
+  [
+    {row:0,col:0},
+    {row:0,col:1},
+    {row:0,col:2}
+  ]
+];
+->make this at the top of deriveActivePlayer() function.
+
+->But see there are multiple so just make a new file winning-combinations.js and paste the code from the course.
+
+->Now we will use the state concept for knowing the "winner" of the game.
+
+like this:-
+const [hasWinner,setWinner] = useState(false);
+
+->we will check whether there is winning_Combinations active or not(means ke ola combinations mathi koi ek active che) then we will make hasWinner=true otherwise we will keep it false.
+
+->see we "would" do that but we will not do this because we can get the information about the winner from our gameturns also. so no need to use this and also we should get that information outside the "handleSelectSquare" function because the app component is re-executing every time so from that we can get the update.
+
+->because see we are updating the "gameTurns" array so as we know that app() function will re-execute again after every turn.
