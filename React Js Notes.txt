@@ -1173,7 +1173,6 @@ export default function Tabs({children}){
 ->see here the 'content at the last' that we want to displayed in Tabs component is now set. see we have send that content between opening and closing tags of 'Tabs' custom component.Now we have to see for the 'Tab buttons'.
 
 ->Now if we set the those TabButtons inside the <menu></menu> in Tabs.jsx file:- like this
-
 ->export default function Tabs({children}){
     return(
         <>
@@ -1195,7 +1194,7 @@ export default function Tabs({children}){
 ->**Now instead of passing that all custom 'TabButtons' inside the menu in the Tabs.jsx file,we will pass the JSX code as an value to this custom 'Tabs' Component.
 
 
-->***JSX code in the end are just regular values that can be used as an values in the code.
+->******JSX code in the end are just regular values that can be used as an values in the code.
 
 ->like this:-examples.jsx file
 <Tabs buttons={   //like this we can pass those custom TabButtons as an values
@@ -2164,9 +2163,6 @@ export default function GameBoard({onSelectSquare}){
 
 
 ->in app.jsx file:-
-
-
-
 ->see here we know that if the state value's depends upon the previous state value then we have to use the functional approach that's why we have written :-
 
 setGameTurns(prevTurns => {
@@ -2219,13 +2215,16 @@ if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
     const updatedTurns = [
 {
 square: {row:rowIndex , col:colIndex},
-player : activePlayer
+player : currentPlayer
 },
 ...prevTurns]
 
 return updatedTurns;
     });
   }
+***->so aapde karvanu hatu change in state of gameTurns , activePlayer toh biju state che . toh aapde pehla laikhu tu ke player:activePlayer in setgameturns updating function. toh ae aapde bey states ne merge karta hata. aetle aapde ek variable "currentPlayer" lidhu ane intialize kairu with 'X'. now prevTurn[0].player==='X' then change currentPlayer='O'. and niche ola "upadatedTurns" ma 
+"player:currentPlayer" change karvanu rehse.
+
 
 
 ->****Now let's see the concept of deriving states from props:-
@@ -2287,7 +2286,7 @@ export default function Log({turns}){
 }
 
 ->Now see here:-
-setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it state updation depends upon previous state value,we cannot directly update it 
     setGameTurns(prevTurns => {
 
       let currentPlayer= 'X';
@@ -2360,7 +2359,7 @@ if(gameTurns.length > 0 && gameTurns[0].player === 'X' ){
     const updatedTurns = [
     {
       square: {row:rowIndex , col:colIndex},
-      player : activePlayer
+      player : currentPlayer
     },
       ...prevTurns]
 
@@ -2475,7 +2474,7 @@ function App() {
 ->Now we let's work upon disabiling buttons conditionally:-
 ->if the particular square is selected then it should not be reselected multiple times.
 
-->see if we use built-in html property "disabled" on button then every buttons will be disabled. so we want to disabled it dynamically.
+->see if we use "built-in" html property "disabled" on button then every buttons will be disabled. so we want to disabled it dynamically.
 
 ->just see whether the playerSymbol=='X' or 'O' then it will be selected it if it is null then it will disabled.Simple!!!!!
 
@@ -2483,7 +2482,7 @@ function App() {
  {row.map((playerSymbol,colIndex)=><li key={colIndex}><button onClick={()=>onSelectSquare(rowIndex,colIndex)} disabled={playerSymbol!=null}>{playerSymbol}</button></li>)}
 
 
-***->Now we are at the last part of the game that is "Game Over" .
+***->Now we are at the last part of the game that is "Game Over" screen.
 ->Now there are many possible winning combinations:-
 
 ->so now this part will be done again in app component because there only we have to show the "Game Over" Message over there and also we will come to know which player win. 
@@ -2510,3 +2509,239 @@ const [hasWinner,setWinner] = useState(false);
 ->see we "would" do that but we will not do this because we can get the information about the winner from our gameturns also. so no need to use this and also we should get that information outside the "handleSelectSquare" function because the app component is re-executing every time so from that we can get the update.
 
 ->because see we are updating the "gameTurns" array so as we know that app() function will re-execute again after every turn.
+
+->so let us use for loop and take "turn" one by one from "turns":-
+for(const combination of WINNING_COMBINATIONS){
+    const firstSquareSymbol
+    const secondSquareSymbol
+    const thirdSquareSymbol
+  }
+->see here we have taken 3 squares because we know that we need 3 squares to have same symbol to win the game.
+
+->**Now the problem is that the "gameBoard" component is in gameBoard.jsx file. so just move this things mentioned below from that file to app.jsx file.
+let gameBoard=initialBoard;
+
+  for(const turn of turns){
+    const {square,player}=turn;
+    const {row,col}=square;
+
+    gameBoard[row][col]=player;
+  }
+
+
+->Now we have to also cut off the intial gameboard from gameboard.jsx file to app.jsx file.
+
+
+->**So now we are deriving the gameboard in app component.
+
+->now just replace the "turns" with the "gameturns".
+->like this:-
+for(const turn of gameTurns){ <---this one
+    const {square,player}=turn;
+    const {row,col}=square;
+
+->now during passing of the props to gameBoard component,instead of passing "turn" now, pass the "board={gameBoard}" as an prop to gameboard component in gameboard.jsx file. and this "board={gameboard}" we are now deriving in app.jsx file.
+
+->in gameboard.jsx file:- do this changes:-
+export default function GameBoard({onSelectSquare,board}){
+
+->here instead of accepting "turns" prop, accept "board" prop. and at bottom change this:-
+ <ol id="game-board">
+         this one---> {board.map((row,rowIndex)=><li key={rowIndex}>
+
+
+->now this way we will try different combinations using for loop:-
+for(const combination of WINNING_COMBINATIONS){
+    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol= gameBoard[combination[2].row][combination[2].column];
+}
+
+
+->now we will apply the logic of winner that is if there is any square selected first see that , then see that whether that square is equal to second square and third square then just upadate the (winner=square symbol).
+
+->like this:-
+let winner;
+
+  for(const combination of WINNING_COMBINATIONS){
+    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol= gameBoard[combination[2].row][combination[2].column];
+  
+   if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
+    winner = firstSquareSymbol;
+   }
+  } 
+
+->now add this in return statement above the custom gameboard component:-
+{winner && <p>You Won, {winner}!</p>}
+
+
+->Now let's change our UI. Make "GameOver.jsx" file and write this:-
+export default function GameOver({winner}){
+    return(
+        <div id="game-over">
+            <h2>Game Over!</h2>
+            <p>{winner} won!</p>
+            <p><button>Rematch!</button></p>
+        </div>
+    );
+}
+
+->now in app.jsx file:-
+->import 'GameOver.jsx' file and do this change:-
+
+{winner && <GameOver winner={winner}/>} <---instead of writing our paragraph when we have the winner we want the just UI of the GameOver.
+
+
+->**Now there is also possible that no one is winner and we get the draw.
+
+->so the logic for it is simple:-
+if the gameTurns array's length === 9 and we do not have winner then there is a draw.
+
+->so in app.jsx file:-
+const hasDraw= gameTurns.length === 9 && !winner;
+
+and in return statement:-
+just do this change:-
+ { (winner || hasDraw) && <GameOver winner={winner}/>}
+->it means if we have winner or hasDraw then just show the GameOver component.
+
+
+->now we have to also do the changes in the GameOver component:-
+export default function GameOver({winner}){
+    return(
+        <div id="game-over">
+            <h2>Game Over!</h2>
+            {winner && <p>{winner} won!</p>} 
+            {!winner && <p>It&apos; a draw!</p>} 
+            <p><button>Rematch!</button></p>
+        </div>
+    );
+}
+->see we know that every time we would not get winner, there can also be draw so just change that if we have first winner then only display the winner msg and if we dont have winner then display the draw msg.
+
+
+->***now till here it is completed , now one single task is remaining that is if we click on 'Rematch!' button then the match should restart.
+
+
+->**so let's do it:-
+see in the end our whole game is controlled by this 'gameturns' state. and this is the single source of truth for the entire game.
+
+->***so this 'gameturns' state is used to derive the gameboard, activePlayer and the winner.
+
+->**so to restart means simply clear this 'gameturns' array.
+
+->****so just do this only simple!!
+ function handleRestart(){
+    setGameTurns([]);
+  }
+
+->now we have to ensure about that this function should be triggered inside the app component from the gameOver component.so just pass this function as an prop to gameover component.
+
+->so just do this:-
+->in app.jsx file:-
+{ (winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart}/>}
+
+->in gameOver.jsx file:-
+<p><button onClick={onRestart}>Rematch!</button></p>
+
+
+->****but now another problem comes into picture that after doing all this when we click on Restart it will not reset the 'gameturns' array.
+
+->**see look at this line:-
+ gameBoard[row][col]=player;
+
+->***here we are overriding some inner element in nested array in another array with the symbol of a player that took a certain turn. The problem is that the gameBoard, where we are overriding this value is based on this 'intialGameBoard', and that is an array full of arrays.
+
+
+->*****We know that in javascript, arrays/objects are reference values that means they are stored in memory, even if they are stored in different variables then also they are stored in memory.
+
+->******so when we are doing this gameBoard[row][col]=player; we are updating the value directly in the memory i.e in 'intialGameBoard'.so when we restart the match the array will not reset.
+
+
+->*******soln of this is pretty simple. Remember that when we are updating the state variable which is either array or object we cannot update directly, we have to update it in immutable way. Means we have to make deep copy of it.
+
+->like this:-
+ let gameBoard=[...initialBoard];
+and then finally map it:-
+let gameBoard=[...initialBoard.map(array => [...array])];
+
+->hence the one last thing is that instead of getting msg like 'X won'/'O won' we should get the player name instead of symbol.
+
+->****now we would think that let's again use the app component and lift the state up and remove thi:-
+ const [playerName,setPlayerName] = useState(Intialname);//for saving the player name
+
+->***but no we cannot do that because that state is used for this:-
+ editablePlayerName= <input type="text" value={playerName}  onChange={handleChange}  required/>
+
+->****so just solution is that make another state in app.jsx and make one function which is called from the player.jsx component and triggered in app.jsx file.
+
+->in app.jsx file:-
+ const [players,setPlayers] = useState({
+    'X':'Player 1',
+    'O':'Player 2'
+  });
+->see here we have 'object' as an intial value pass to the 'players' state variable because those player's names are dependent upon the 'player Symbol'.
+
+->***Now this 'setPlayer' state updating function is called only when we 'click' on the 'save' button in 'player' component.
+
+
+->***in app.jsx file add this:-
+  function handlePlayerNameChange(symbol,newName){
+    setPlayers();
+  }
+->now this is the state updating function which will change the player's name.
+
+->***Now we have to update the state based on old state.because only one name of one player changes here and we don't want to lose the name and information for the other player.
+
+->so do this first:-
+function handlePlayerNameChange(symbol,newName){
+    setPlayers(prevPlayers =>{
+      return{
+        ...prevPlayers,
+      }
+    });
+  }
+-> here we have first spread off the previous object i.e "...prevPlayers".
+
+
+->***Now we will override one of the properties from the 'symbol' and 'newName'.
+
+->so we will use the JS syntax to update the value dynamically by using the 'square brackets'.
+
+->like this:-
+function handlePlayerNameChange(symbol,newName){
+    setPlayers(prevPlayers =>{
+      return{
+        ...prevPlayers,
+        [symbol]: newName
+      }; 
+    });
+  }
+->here " [symbol]: newName " we are ensuring that the symbol of the player should not change , only the player name should change. here we are doing dynamically change by accessing the property dynamically.
+
+->After doing this we have to ensure that this function should be triggered. so pass this function 'handlePlayerChange()' as an prop to player component.
+
+->pass to both the players:-in app.jsx file
+<Player Intialname="Player-1" symbol="X" isActive={activePlayer === 'X'} onChangename={handlePlayerNameChange}/>
+        <Player Intialname="Player-2" symbol="O" isActive={activePlayer === 'O'} onChangename={handlePlayerNameChange}/>
+
+->in player.jsx file:-
+if(isEditing){
+        onChangeName(symbol,playerName);
+      }
+->now just add this condition "isEditing" because if we start editing the player's name then only this function should be called.
+
+
+->now in app.jsx file:-Now do the change that instead of passing the playerSymbol,pass the player name.
+
+->like this:-
+if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
+    winner = players[firstSquareSymbol];
+   }
+
+->so here we will use the 'players' state to derive the name of the player who won, by dynamically accessing a property and property we want to access is stored in firstSquareSymbol.
+
+->so now the functionality wise the game is finished, now we have to see about the code clearity means we have to write the code in some readable format.
+

@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 
-export default function Player({Intialname,symbol , isActive}){
+export default function Player({Intialname,symbol , isActive , onChangeName}){
   
     const [isEditing,setisEditing] = useState(false); //for switching bet 'save' and 'edit'.
 
@@ -13,6 +13,11 @@ export default function Player({Intialname,symbol , isActive}){
       //or 
       // setisEditing(!isEditing);see this is also not true see in notepad
       setisEditing((editing)=>!isEditing);
+     
+      if(isEditing){
+        onChangeName(symbol,playerName);
+      }
+
     }
 
     function handleChange(event){
@@ -23,7 +28,7 @@ export default function Player({Intialname,symbol , isActive}){
     let editablePlayerName=<span className="player-name">{playerName}</span>;
     // let btnCaption='Edit';//1st way
 
-    if(isEditing){
+    if(isEditing){ 
       editablePlayerName= <input type="text" value={playerName}  onChange={handleChange}  required/>
       // btnCaption="Save";
     }
