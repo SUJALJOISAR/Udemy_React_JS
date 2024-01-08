@@ -2181,7 +2181,12 @@ because the new turns array will depend upon the old turns array. Now we want a 
 function handleSelectSquare(rowIndex,colIndex){
     setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
     setGameTurns(prevTurns => {
-    const updatedTurns = [{square: {row:rowIndex , col:colIndex},player : activePlayer},...prevTurns]
+    const updatedTurns = [
+	{
+	square: {row:rowIndex , col:colIndex},
+	player : activePlayer	
+	},
+	...prevTurns]
     });
   }
 
@@ -2234,7 +2239,7 @@ return updatedTurns;
 let gameBoard=initialBoard;
 
     for(const turn of turns){
-      const {square,player}=turns;
+      const {square,player}=turn;
       const {row,col}=square;
 
       gameBoard[row][col]=player;
@@ -2261,7 +2266,7 @@ gameboard[row][col]=player;
 
 ->***So here we didn't manage any state here but just this process is called deriving state.
 
-->but doing after all this when we relaod our site then we will see errors and gameboard will disappear.Reason is that the function handleSelectSquare is not been called.so first that we have to call.
+->but doing after all this when we reload our site then we will see errors and gameboard will disappear.Reason is that the function handleSelectSquare is not been called.so first that we have to call.
 
 
 ->so handleSelectSquare function is in app.jsx file and it is passed as an prop to gameboard.jsx file(gameboard component).so when the button is click that handleSelectSquare function is called, but see it also needs parameters to be passed, so we have to pass rowIndex and colIndex to it to execute that function.
@@ -2669,7 +2674,7 @@ let gameBoard=[...initialBoard.map(array => [...array])];
 
 ->hence the one last thing is that instead of getting msg like 'X won'/'O won' we should get the player name instead of symbol.
 
-->****now we would think that let's again use the app component and lift the state up and remove thi:-
+->****now we would think that let's again use the app component and lift the state up and remove this:-
  const [playerName,setPlayerName] = useState(Intialname);//for saving the player name
 
 ->***but no we cannot do that because that state is used for this:-
@@ -2744,4 +2749,85 @@ if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareS
 ->so here we will use the 'players' state to derive the name of the player who won, by dynamically accessing a property and property we want to access is stored in firstSquareSymbol.
 
 ->so now the functionality wise the game is finished, now we have to see about the code clearity means we have to write the code in some readable format.
+
+->Now come to app.jsx file:-
+->see it contains lot of logics, we have added many states, and other functions as well but now its time to clear it some bit to read it properly.
+
+->for eg:-this whole part is for deriving winner:-
+let winner;
+
+  for(const combination of WINNING_COMBINATIONS){
+    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol= gameBoard[combination[2].row][combination[2].column];
+  
+   if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
+    winner = players[firstSquareSymbol];
+   }
+  } 
+
+  const hasDraw= gameTurns.length === 9 && !winner;
+
+->so let us make one another function and then under it we put this logic of winner.
+
+->so we have done this:-
+function deriveWinner(gameBoard,players){
+  let winner;
+
+  for(const combination of WINNING_COMBINATIONS){
+    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
+    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
+    const thirdSquareSymbol= gameBoard[combination[2].row][combination[2].column];
+  
+   if(firstSquareSymbol && firstSquareSymbol === secondSquareSymbol && firstSquareSymbol === thirdSquareSymbol){
+    winner = players[firstSquareSymbol];
+   }
+  } 
+  return winner;
+}
+->just cut the code from that app function and make another function outside the app function and add that code under that.
+
+->and now this function should be called inside the app function:-
+ const winner = deriveWinner(gameBoard,players);
+
+->Similarly make another function to derive the gameboard:-
+function deriveGameBoard(gameTurns){
+  let gameBoard=[...INITIAL_GAME_BOARD.map(array => [...array])];
+
+  for(const turn of gameTurns){
+    const {square,player}=turn;
+    const {row,col}=square;
+
+    gameBoard[row][col]=player;
+  }
+
+  return gameBoard;
+}
+
+->calling function:-
+const gameBoard = deriveGameBoard(gameTurns);
+
+
+->Now just do that declare this at the top of the every function means after the import statements:-
+  const  PLAYERS={
+    X:'Player 1',
+    O:'Player 2'
+  }; ->this is new
+
+const INITIAL_GAME_BOARD=[
+  [null,null,null],
+  [null,null,null],
+  [null,null,null]
+]; <----see this was already there, we have just written in uppercase characters
+
+
+and just at bottom calling Player custom component:- do this change
+<Player Intialname={PLAYERS.X} .... />
+<Player Intialname={PLAYERS.O} .../>
+
+->So now the whole project is completed..
+
+
+
+->Starting Invest Calculator(Practice Project):-
 

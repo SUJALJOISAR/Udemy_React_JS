@@ -5,7 +5,12 @@ import { useState } from "react";
 import GameOver from "./components/GameOver";
 import { WINNING_COMBINATIONS } from "./components/winning-combinations";
 
-const initialBoard=[
+  const  PLAYERS={
+    X:'Player 1',
+    O:'Player 2'
+  };
+
+const INITIAL_GAME_BOARD=[
   [null,null,null],
   [null,null,null],
   [null,null,null]
@@ -21,21 +26,8 @@ function deriveActivePlayer(gameTurns){
   return currentPlayer;
 }
 
-function App() {
-
-  const [players,setPlayers] = useState({
-    'X':'Player 1',
-    'O':'Player 2'
-  });
-
-//  const [hasWinner,setWinner] = useState(false);
- const [gameTurns,setGameTurns] =useState([]);
-
-// const [activePlayer,setactivePlayer] = useState('X');//let intial value of state variable be 'X'
-
-  const activePlayer = deriveActivePlayer(gameTurns);
-
-  let gameBoard=[...initialBoard.map(array => [...array])];
+function deriveGameBoard(gameTurns){
+  let gameBoard=[...INITIAL_GAME_BOARD.map(array => [...array])];
 
   for(const turn of gameTurns){
     const {square,player}=turn;
@@ -44,6 +36,10 @@ function App() {
     gameBoard[row][col]=player;
   }
 
+  return gameBoard;
+}
+
+function deriveWinner(gameBoard,players){
   let winner;
 
   for(const combination of WINNING_COMBINATIONS){
@@ -55,21 +51,31 @@ function App() {
     winner = players[firstSquareSymbol];
    }
   } 
+  return winner;
+}
+
+function App() {
+
+  const [players,setPlayers] = useState({
+    'X':'Player 1',
+    'O':'Player 2'
+  });
+
+ const [gameTurns,setGameTurns] =useState([]);
+ const activePlayer = deriveActivePlayer(gameTurns);
+
+  const gameBoard = deriveGameBoard(gameTurns);
+
+  const winner = deriveWinner(gameBoard,players);
 
   const hasDraw= gameTurns.length === 9 && !winner;
 
   function handleSelectSquare(rowIndex,colIndex){
-    // setactivePlayer((curActivePlayer)=>curActivePlayer==='X' ? 'O' : 'X');//as it depends state updation depends upon previous state value,we cannot directly update it 
+   
     setGameTurns(prevTurns => {
+   const currentPlayer = deriveActivePlayer(prevTurns);
 
-      // let currentPlayer= 'X';
-
-      // if(prevTurns.length > 0 && prevTurns[0].player === 'X' ){
-      //   currentPlayer = 'O';
-      // }
-
-      const currentPlayer = deriveActivePlayer(prevTurns);
-
+  
 
     const updatedTurns = [
     {
@@ -100,8 +106,8 @@ function App() {
       <div id="game-container">
       {/* Players */}
       <ol id='players' className="highlight-player">
-        <Player Intialname="Player-1" symbol="X" isActive={activePlayer === 'X'} onChangename={handlePlayerNameChange}/>
-        <Player Intialname="Player-2" symbol="O" isActive={activePlayer === 'O'} onChangename={handlePlayerNameChange}/>
+        <Player Intialname={PLAYERS.X} symbol="X" isActive={activePlayer === 'X'} onChangename={handlePlayerNameChange}/>
+        <Player Intialname={PLAYERS.O} symbol="O" isActive={activePlayer === 'O'} onChangename={handlePlayerNameChange}/>
       </ol>
 
     { (winner || hasDraw) && <GameOver winner={winner} onRestart={handleRestart}/>}

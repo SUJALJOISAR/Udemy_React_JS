@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-
 export default function Player({Intialname,symbol , isActive , onChangeName}){
   
     const [isEditing,setisEditing] = useState(false); //for switching bet 'save' and 'edit'.
